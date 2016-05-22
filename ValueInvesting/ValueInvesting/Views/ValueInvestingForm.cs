@@ -80,5 +80,13 @@ namespace ValueInvesting.Views
                 }
             }
         }
+
+        private void watchlistOLV_DoubleClick( object sender, EventArgs e )
+        {
+            if ( watchlistOLV.SelectedItems.Count == 1 )
+            {
+                this.StockQuery( (Stock)watchlistOLV.SelectedObject );
+            }
+        }
     }
 }

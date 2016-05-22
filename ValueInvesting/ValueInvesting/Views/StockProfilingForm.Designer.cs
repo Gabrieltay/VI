@@ -70,9 +70,10 @@
             // 
             this.stockNameLabel.AutoSize = true;
             this.stockNameLabel.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockNameLabel.Location = new System.Drawing.Point(12, 30);
+            this.stockNameLabel.Location = new System.Drawing.Point(9, 24);
+            this.stockNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stockNameLabel.Name = "stockNameLabel";
-            this.stockNameLabel.Size = new System.Drawing.Size(259, 37);
+            this.stockNameLabel.Size = new System.Drawing.Size(208, 28);
             this.stockNameLabel.TabIndex = 0;
             this.stockNameLabel.Text = "Company Name";
             // 
@@ -80,9 +81,10 @@
             // 
             this.symLabel.AutoSize = true;
             this.symLabel.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.symLabel.Location = new System.Drawing.Point(16, 9);
+            this.symLabel.Location = new System.Drawing.Point(12, 7);
+            this.symLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.symLabel.Name = "symLabel";
-            this.symLabel.Size = new System.Drawing.Size(67, 21);
+            this.symLabel.Size = new System.Drawing.Size(59, 19);
             this.symLabel.TabIndex = 1;
             this.symLabel.Text = "Symbol";
             // 
@@ -90,9 +92,10 @@
             // 
             this.priceLabel.AutoSize = true;
             this.priceLabel.Font = new System.Drawing.Font("Century Gothic", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceLabel.Location = new System.Drawing.Point(12, 89);
+            this.priceLabel.Location = new System.Drawing.Point(9, 72);
+            this.priceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(110, 44);
+            this.priceLabel.Size = new System.Drawing.Size(89, 37);
             this.priceLabel.TabIndex = 2;
             this.priceLabel.Text = "Price";
             // 
@@ -100,9 +103,11 @@
             // 
             this.groupBox1.Controls.Add(this.GepLabel);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(20, 160);
+            this.groupBox1.Location = new System.Drawing.Point(15, 130);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(150, 100);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(112, 81);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Growth Entry Price";
@@ -113,9 +118,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GepLabel.AutoSize = true;
             this.GepLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GepLabel.Location = new System.Drawing.Point(6, 39);
+            this.GepLabel.Location = new System.Drawing.Point(4, 32);
+            this.GepLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.GepLabel.Name = "GepLabel";
-            this.GepLabel.Size = new System.Drawing.Size(57, 28);
+            this.GepLabel.Size = new System.Drawing.Size(47, 23);
             this.GepLabel.TabIndex = 5;
             this.GepLabel.Text = "GEP";
             this.GepLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -126,9 +132,11 @@
             // 
             this.groupBox2.Controls.Add(this.DepLabel);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(177, 160);
+            this.groupBox2.Location = new System.Drawing.Point(133, 130);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(150, 100);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(112, 81);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dividend Entry Price";
@@ -137,9 +145,10 @@
             // 
             this.DepLabel.AutoSize = true;
             this.DepLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DepLabel.Location = new System.Drawing.Point(6, 39);
+            this.DepLabel.Location = new System.Drawing.Point(4, 32);
+            this.DepLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.DepLabel.Name = "DepLabel";
-            this.DepLabel.Size = new System.Drawing.Size(54, 28);
+            this.DepLabel.Size = new System.Drawing.Size(44, 23);
             this.DepLabel.TabIndex = 6;
             this.DepLabel.Text = "DEP";
             this.DepLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,9 +159,11 @@
             // 
             this.groupBox3.Controls.Add(this.AepLabel);
             this.groupBox3.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(333, 160);
+            this.groupBox3.Location = new System.Drawing.Point(250, 130);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(150, 100);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(112, 81);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Asset Entry Price";
@@ -161,9 +172,10 @@
             // 
             this.AepLabel.AutoSize = true;
             this.AepLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AepLabel.Location = new System.Drawing.Point(6, 39);
+            this.AepLabel.Location = new System.Drawing.Point(4, 32);
+            this.AepLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.AepLabel.Name = "AepLabel";
-            this.AepLabel.Size = new System.Drawing.Size(55, 28);
+            this.AepLabel.Size = new System.Drawing.Size(45, 23);
             this.AepLabel.TabIndex = 7;
             this.AepLabel.Text = "AEP";
             this.AepLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -182,9 +194,11 @@
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.moatCombobox);
             this.groupBox4.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(380, 267);
+            this.groupBox4.Location = new System.Drawing.Point(285, 217);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(259, 200);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Size = new System.Drawing.Size(194, 162);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Economy Moat and RISK";
@@ -195,9 +209,10 @@
             this.keyComboBox.Items.AddRange(new object[] {
             "HIGH",
             "LOW"});
-            this.keyComboBox.Location = new System.Drawing.Point(172, 160);
+            this.keyComboBox.Location = new System.Drawing.Point(129, 130);
+            this.keyComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.keyComboBox.Name = "keyComboBox";
-            this.keyComboBox.Size = new System.Drawing.Size(72, 25);
+            this.keyComboBox.Size = new System.Drawing.Size(55, 23);
             this.keyComboBox.TabIndex = 17;
             this.keyComboBox.Text = "HIGH";
             this.keyComboBox.SelectedIndexChanged += new System.EventHandler(this.keyComboBox_SelectedIndexChanged);
@@ -205,9 +220,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 163);
+            this.label5.Location = new System.Drawing.Point(5, 132);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 19);
+            this.label5.Size = new System.Drawing.Size(75, 16);
             this.label5.TabIndex = 16;
             this.label5.Text = "Key People  ";
             // 
@@ -217,9 +233,10 @@
             this.sciComboBox.Items.AddRange(new object[] {
             "HIGH",
             "LOW"});
-            this.sciComboBox.Location = new System.Drawing.Point(172, 132);
+            this.sciComboBox.Location = new System.Drawing.Point(129, 107);
+            this.sciComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sciComboBox.Name = "sciComboBox";
-            this.sciComboBox.Size = new System.Drawing.Size(72, 25);
+            this.sciComboBox.Size = new System.Drawing.Size(55, 23);
             this.sciComboBox.TabIndex = 15;
             this.sciComboBox.Text = "HIGH";
             this.sciComboBox.SelectedIndexChanged += new System.EventHandler(this.sciComboBox_SelectedIndexChanged);
@@ -227,9 +244,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 134);
+            this.label4.Location = new System.Drawing.Point(5, 109);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 19);
+            this.label4.Size = new System.Drawing.Size(86, 16);
             this.label4.TabIndex = 14;
             this.label4.Text = "Science Tech  ";
             // 
@@ -239,9 +257,10 @@
             this.infComboBox.Items.AddRange(new object[] {
             "HIGH",
             "LOW"});
-            this.infComboBox.Location = new System.Drawing.Point(172, 100);
+            this.infComboBox.Location = new System.Drawing.Point(129, 81);
+            this.infComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.infComboBox.Name = "infComboBox";
-            this.infComboBox.Size = new System.Drawing.Size(72, 25);
+            this.infComboBox.Size = new System.Drawing.Size(55, 23);
             this.infComboBox.TabIndex = 13;
             this.infComboBox.Text = "HIGH";
             this.infComboBox.SelectedIndexChanged += new System.EventHandler(this.infComboBox_SelectedIndexChanged);
@@ -249,9 +268,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 103);
+            this.label3.Location = new System.Drawing.Point(5, 84);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 19);
+            this.label3.Size = new System.Drawing.Size(63, 16);
             this.label3.TabIndex = 12;
             this.label3.Text = "Inflation    ";
             // 
@@ -261,9 +281,10 @@
             this.regComboBox.Items.AddRange(new object[] {
             "HIGH",
             "LOW"});
-            this.regComboBox.Location = new System.Drawing.Point(172, 70);
+            this.regComboBox.Location = new System.Drawing.Point(129, 57);
+            this.regComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.regComboBox.Name = "regComboBox";
-            this.regComboBox.Size = new System.Drawing.Size(72, 25);
+            this.regComboBox.Size = new System.Drawing.Size(55, 23);
             this.regComboBox.TabIndex = 11;
             this.regComboBox.Text = "HIGH";
             this.regComboBox.SelectedIndexChanged += new System.EventHandler(this.regComboBox_SelectedIndexChanged);
@@ -271,9 +292,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 73);
+            this.label2.Location = new System.Drawing.Point(5, 59);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 19);
+            this.label2.Size = new System.Drawing.Size(69, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Regulation ";
             // 
@@ -286,9 +308,10 @@
             "Weak Moat(s)",
             "Moat is present but unclear",
             "No Foreseeable Moat"});
-            this.moatCombobox.Location = new System.Drawing.Point(11, 33);
+            this.moatCombobox.Location = new System.Drawing.Point(8, 27);
+            this.moatCombobox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.moatCombobox.Name = "moatCombobox";
-            this.moatCombobox.Size = new System.Drawing.Size(233, 25);
+            this.moatCombobox.Size = new System.Drawing.Size(176, 23);
             this.moatCombobox.TabIndex = 0;
             this.moatCombobox.SelectedIndexChanged += new System.EventHandler(this.moatCombobox_SelectedIndexChanged);
             // 
@@ -296,9 +319,11 @@
             // 
             this.groupBox5.Controls.Add(this.JepLabel);
             this.groupBox5.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(489, 161);
+            this.groupBox5.Location = new System.Drawing.Point(367, 131);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(150, 100);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(112, 81);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Jitta Entry Price";
@@ -307,9 +332,10 @@
             // 
             this.JepLabel.AutoSize = true;
             this.JepLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JepLabel.Location = new System.Drawing.Point(6, 39);
+            this.JepLabel.Location = new System.Drawing.Point(4, 32);
+            this.JepLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.JepLabel.Name = "JepLabel";
-            this.JepLabel.Size = new System.Drawing.Size(49, 28);
+            this.JepLabel.Size = new System.Drawing.Size(40, 23);
             this.JepLabel.TabIndex = 7;
             this.JepLabel.Text = "JEP";
             this.JepLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -318,9 +344,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(306, 110);
+            this.label1.Location = new System.Drawing.Point(230, 89);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(274, 30);
+            this.label1.Size = new System.Drawing.Size(205, 22);
             this.label1.TabIndex = 7;
             this.label1.Text = "Business Confidence :";
             // 
@@ -328,9 +355,10 @@
             // 
             this.bizConLabel.AutoSize = true;
             this.bizConLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bizConLabel.Location = new System.Drawing.Point(575, 110);
+            this.bizConLabel.Location = new System.Drawing.Point(431, 89);
+            this.bizConLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bizConLabel.Name = "bizConLabel";
-            this.bizConLabel.Size = new System.Drawing.Size(40, 28);
+            this.bizConLabel.Size = new System.Drawing.Size(32, 23);
             this.bizConLabel.TabIndex = 8;
             this.bizConLabel.Text = "##";
             this.bizConLabel.MouseLeave += new System.EventHandler(this.bizConLabel_MouseLeave);
@@ -343,9 +371,10 @@
             this.addButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.Image = global::ValueInvesting.Properties.Resources.Add;
-            this.addButton.Location = new System.Drawing.Point(420, 473);
+            this.addButton.Location = new System.Drawing.Point(315, 384);
+            this.addButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(100, 100);
+            this.addButton.Size = new System.Drawing.Size(75, 81);
             this.addButton.TabIndex = 9;
             this.infoTooltip.SetToolTip(this.addButton, "Add/Update");
             this.addButton.UseVisualStyleBackColor = false;
@@ -358,20 +387,24 @@
             this.delButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.delButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delButton.Image = global::ValueInvesting.Properties.Resources.Delete;
-            this.delButton.Location = new System.Drawing.Point(539, 473);
+            this.delButton.Location = new System.Drawing.Point(404, 384);
+            this.delButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(100, 100);
+            this.delButton.Size = new System.Drawing.Size(75, 81);
             this.delButton.TabIndex = 10;
             this.infoTooltip.SetToolTip(this.delButton, "Delete");
             this.delButton.UseVisualStyleBackColor = false;
+            this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.sumTxtbox);
             this.groupBox6.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(20, 267);
+            this.groupBox6.Location = new System.Drawing.Point(15, 217);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(354, 302);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Size = new System.Drawing.Size(266, 245);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Summary";
@@ -380,19 +413,20 @@
             // 
             this.sumTxtbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sumTxtbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sumTxtbox.Location = new System.Drawing.Point(3, 19);
+            this.sumTxtbox.Location = new System.Drawing.Point(2, 15);
+            this.sumTxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sumTxtbox.Multiline = true;
             this.sumTxtbox.Name = "sumTxtbox";
             this.sumTxtbox.ReadOnly = true;
             this.sumTxtbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sumTxtbox.Size = new System.Drawing.Size(348, 280);
+            this.sumTxtbox.Size = new System.Drawing.Size(262, 228);
             this.sumTxtbox.TabIndex = 0;
             // 
             // StockProfilingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 581);
+            this.ClientSize = new System.Drawing.Size(495, 472);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.delButton);
             this.Controls.Add(this.addButton);
@@ -408,6 +442,7 @@
             this.Controls.Add(this.stockNameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "StockProfilingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

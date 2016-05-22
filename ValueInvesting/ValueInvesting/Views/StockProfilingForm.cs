@@ -157,5 +157,10 @@ namespace ValueInvesting.Views
         {
             this.infoTooltip.Hide( this.bizConLabel );
         }
+
+        private void delButton_Click( object sender, EventArgs e )
+        {
+            WatchlistController.getInstance().Delete( this.mStock );
+        }
     }
 }

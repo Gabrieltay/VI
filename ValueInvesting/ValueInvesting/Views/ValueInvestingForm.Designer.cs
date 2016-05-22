@@ -53,7 +53,7 @@
             this.tickTxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tickTxtbox.Location = new System.Drawing.Point(762, 30);
             this.tickTxtbox.Name = "tickTxtbox";
-            this.tickTxtbox.Size = new System.Drawing.Size(127, 23);
+            this.tickTxtbox.Size = new System.Drawing.Size(127, 20);
             this.tickTxtbox.TabIndex = 0;
             this.tickTxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tickTxtbox_KeyPress);
             // 
@@ -62,9 +62,9 @@
             this.usRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.usRadioButton.AutoSize = true;
             this.usRadioButton.Checked = true;
-            this.usRadioButton.Location = new System.Drawing.Point(762, 59);
+            this.usRadioButton.Location = new System.Drawing.Point(784, 59);
             this.usRadioButton.Name = "usRadioButton";
-            this.usRadioButton.Size = new System.Drawing.Size(127, 23);
+            this.usRadioButton.Size = new System.Drawing.Size(105, 20);
             this.usRadioButton.TabIndex = 0;
             this.usRadioButton.TabStop = true;
             this.usRadioButton.Text = "NYSE, NASDAQ";
@@ -74,9 +74,9 @@
             // 
             this.sgRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sgRadioButton.AutoSize = true;
-            this.sgRadioButton.Location = new System.Drawing.Point(762, 88);
+            this.sgRadioButton.Location = new System.Drawing.Point(771, 88);
             this.sgRadioButton.Name = "sgRadioButton";
-            this.sgRadioButton.Size = new System.Drawing.Size(58, 23);
+            this.sgRadioButton.Size = new System.Drawing.Size(49, 20);
             this.sgRadioButton.TabIndex = 1;
             this.sgRadioButton.Text = "SGX";
             this.sgRadioButton.UseVisualStyleBackColor = true;
@@ -140,12 +140,14 @@
             this.watchlistOLV.TabIndex = 5;
             this.watchlistOLV.UseCompatibleStateImageBehavior = false;
             this.watchlistOLV.View = System.Windows.Forms.View.Details;
+            this.watchlistOLV.DoubleClick += new System.EventHandler(this.watchlistOLV_DoubleClick);
             // 
             // symColumn
             // 
             this.symColumn.AspectName = "Sym";
             this.symColumn.Groupable = false;
             this.symColumn.Text = "Symbol";
+            this.symColumn.Width = 80;
             // 
             // nameColumn
             // 
@@ -197,7 +199,7 @@
             // 
             // ValueInvestingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(901, 525);
             this.Controls.Add(this.watchlistOLV);
