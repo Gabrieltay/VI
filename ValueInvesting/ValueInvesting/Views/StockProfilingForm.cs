@@ -142,6 +142,7 @@ namespace ValueInvesting.Views
         private void addButton_Click( object sender, EventArgs e )
         {
             WatchlistController.getInstance().Add( this.mStock );
+            this.Close();
         }
 
         private void bizConLabel_MouseHover( object sender, EventArgs e )
@@ -161,6 +162,7 @@ namespace ValueInvesting.Views
         private void delButton_Click( object sender, EventArgs e )
         {
             WatchlistController.getInstance().Delete( this.mStock );
+            this.Close();
         }
     }
 }

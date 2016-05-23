@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ValueInvesting.Models;
+using ValueInvesting.Utils;
 
 namespace ValueInvesting.Parsers
 {
@@ -54,9 +55,13 @@ namespace ValueInvesting.Parsers
             if ( nDataArray[1] != "N/A" )
                 this.mStock.Last = Double.Parse( nDataArray[1] );
             if ( nDataArray[2] != "N/A" )
+            {
                 this.mStock.Sym = nDataArray[2].ToUpper().Replace( "\"", "" );
+                if ( this.mStock.Sym.Contains("."))
+                    this.mStock.Sym = this.mStock.Sym.Remove( this.mStock.Sym.IndexOf( "." ), this.mStock.Sym.Length - this.mStock.Sym.IndexOf( "." ) );
+            }
             if ( nDataArray[3] != "N/A" )
-                this.mStock.Mkt = MarketTranslate(nDataArray[3].Replace( "\"", "" ).Replace("\n",""));
+                this.mStock.Mkt = Translator.MarketCodeToString(nDataArray[3].Replace( "\"", "" ).Replace("\n",""));
             //if ( nDataArray[4] != "N/A" )
             //    this.mStock.BookValue = Double.Parse( nDataArray[4] );
             //if ( nDataArray[5] != "N/A" )
@@ -77,18 +82,6 @@ namespace ValueInvesting.Parsers
 
             this.mStock.Summary = nNode.InnerText;
             return true;
-        }
-
-
-        private String MarketTranslate(String aCode)
-        {
-            if ( aCode == "NMS" )
-                return "NASDAQ";
-            else if ( aCode == "NYQ" )
-                return "NYSE";
-            else if ( aCode == "SES" )
-                return "SGX";
-            return aCode;
         }
 
         private Stock mStock

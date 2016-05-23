@@ -82,6 +82,7 @@
     <Compile Include="Base\Observer.cs" />
     <Compile Include="Base\Singleton.cs" />
     <Compile Include="Base\Subject.cs" />
+    <Compile Include="Commons\Enums.cs" />
     <Compile Include="Commons\Params.cs" />
     <Compile Include="Controllers\RESTController.cs" />
     <Compile Include="Controllers\WatchlistController.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Utils\Comparer.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\Serializer.cs" />
+    <Compile Include="Utils\Translator.cs" />
     <Compile Include="Views\StockProfilingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,10 +154,31 @@
     <None Include="icons\Add.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="icons\New.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Trash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

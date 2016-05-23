@@ -31,9 +31,9 @@ namespace ValueInvesting.Controllers
             this.StockModel.Add( aStock );
         }
 
-        public void Add( List<Stock> aCodeList )
+        public void Add( List<Stock> aStockList )
         {
-            this.StockModel.Add( aCodeList );
+            this.StockModel.Add( aStockList );
         }
 
         public void Edit( Stock aStock )
@@ -49,6 +49,11 @@ namespace ValueInvesting.Controllers
         public void Delete( ArrayList aDeleteList )
         {
             this.StockModel.Remove( aDeleteList );
+        }
+
+        public void Clear()
+        {
+            this.StockModel.Clear();
         }
 
         public Boolean isExist(Stock aStock)
@@ -99,6 +104,11 @@ namespace ValueInvesting.Controllers
         public void Unsubscribe(Observer aObserver)
         {
             this.StockModel.Unsubscribe( aObserver );
+        }
+
+        public DataModel<Stock> GetModel()
+        {
+            return this.StockModel;
         }
 
         #region Properties

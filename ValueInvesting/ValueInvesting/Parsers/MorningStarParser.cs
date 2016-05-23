@@ -124,7 +124,7 @@ namespace ValueInvesting.Parsers
 
             for ( int i = 6; i < 11; i++ )
             {
-                double nInFlow = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[i] );
+                double nInFlow = String.IsNullOrEmpty( nCols[i] ) ? 0 : Double.Parse( nCols[i] );
                 if ( nInFlow < 0 )
                 {
                     this.mStock.InFlowCash = false;

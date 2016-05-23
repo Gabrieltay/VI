@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ValueInvesting.Commons;
 
 namespace ValueInvesting.Models
 {
+    [Serializable]
     public class Stock
     {
         public Stock(String aSymbol)
