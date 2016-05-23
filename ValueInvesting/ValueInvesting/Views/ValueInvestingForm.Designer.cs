@@ -33,15 +33,6 @@
             this.tickTxtbox = new System.Windows.Forms.TextBox();
             this.usRadioButton = new System.Windows.Forms.RadioButton();
             this.sgRadioButton = new System.Windows.Forms.RadioButton();
-            this.watchlistOLV = new BrightIdeasSoftware.ObjectListView();
-            this.symColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lastColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.growthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.divColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.assetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.updateButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
@@ -52,6 +43,19 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.updateWorker = new System.ComponentModel.BackgroundWorker();
+            this.watchlistOLV = new BrightIdeasSoftware.ObjectListView();
+            this.symColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lastColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.growthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.growthPriceRenderer = new ValueInvesting.Renderers.GrowthPriceRenderer();
+            this.divColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.assetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dividendPriceRenderer = new ValueInvesting.Renderers.DividendPriceRenderer();
+            this.assetPriceRenderer = new ValueInvesting.Renderers.AssetPriceRenderer();
             ((System.ComponentModel.ISupportInitialize)(this.watchlistOLV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,96 +91,6 @@
             this.sgRadioButton.TabIndex = 1;
             this.sgRadioButton.Text = "SGX";
             this.sgRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // watchlistOLV
-            // 
-            this.watchlistOLV.AllColumns.Add(this.symColumn);
-            this.watchlistOLV.AllColumns.Add(this.nameColumn);
-            this.watchlistOLV.AllColumns.Add(this.lastColumn);
-            this.watchlistOLV.AllColumns.Add(this.growthColumn);
-            this.watchlistOLV.AllColumns.Add(this.divColumn);
-            this.watchlistOLV.AllColumns.Add(this.assetColumn);
-            this.watchlistOLV.AllColumns.Add(this.bizColumn);
-            this.watchlistOLV.AllColumns.Add(this.dateColumn);
-            this.watchlistOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.watchlistOLV.BackColor = System.Drawing.Color.LightGray;
-            this.watchlistOLV.CellEditUseWholeCell = false;
-            this.watchlistOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.symColumn,
-            this.nameColumn,
-            this.lastColumn,
-            this.growthColumn,
-            this.divColumn,
-            this.assetColumn,
-            this.bizColumn,
-            this.dateColumn});
-            this.watchlistOLV.Cursor = System.Windows.Forms.Cursors.Default;
-            this.watchlistOLV.FullRowSelect = true;
-            this.watchlistOLV.GridLines = true;
-            this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
-            this.watchlistOLV.Name = "watchlistOLV";
-            this.watchlistOLV.Size = new System.Drawing.Size(904, 395);
-            this.watchlistOLV.TabIndex = 5;
-            this.watchlistOLV.UseCompatibleStateImageBehavior = false;
-            this.watchlistOLV.View = System.Windows.Forms.View.Details;
-            this.watchlistOLV.DoubleClick += new System.EventHandler(this.watchlistOLV_DoubleClick);
-            // 
-            // symColumn
-            // 
-            this.symColumn.AspectName = "Sym";
-            this.symColumn.Groupable = false;
-            this.symColumn.Text = "Symbol";
-            this.symColumn.Width = 69;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.AspectName = "Name";
-            this.nameColumn.Groupable = false;
-            this.nameColumn.Text = "Company";
-            this.nameColumn.Width = 240;
-            // 
-            // lastColumn
-            // 
-            this.lastColumn.AspectName = "Last";
-            this.lastColumn.AspectToStringFormat = "{0:C}";
-            this.lastColumn.Text = "Price";
-            this.lastColumn.Width = 90;
-            // 
-            // growthColumn
-            // 
-            this.growthColumn.AspectName = "GEP";
-            this.growthColumn.AspectToStringFormat = "{0:C}";
-            this.growthColumn.Text = "Growth EP";
-            this.growthColumn.Width = 90;
-            // 
-            // divColumn
-            // 
-            this.divColumn.AspectName = "DEP";
-            this.divColumn.AspectToStringFormat = "{0:C}";
-            this.divColumn.Text = "Dividend EP";
-            this.divColumn.Width = 90;
-            // 
-            // assetColumn
-            // 
-            this.assetColumn.AspectName = "AEP";
-            this.assetColumn.AspectToStringFormat = "{0:C}";
-            this.assetColumn.Text = "Asset EP";
-            this.assetColumn.Width = 90;
-            // 
-            // bizColumn
-            // 
-            this.bizColumn.AspectName = "BizConf";
-            this.bizColumn.Text = "Biz Conf";
-            this.bizColumn.Width = 90;
-            // 
-            // dateColumn
-            // 
-            this.dateColumn.AspectName = "LastUpdate";
-            this.dateColumn.AspectToStringFormat = "{0:d}";
-            this.dateColumn.Text = "Last Updated";
-            this.dateColumn.Width = 122;
             // 
             // updateButton
             // 
@@ -247,7 +161,7 @@
             // 
             this.chartButton.FlatAppearance.BorderSize = 0;
             this.chartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chartButton.Image = global::ValueInvesting.Properties.Resources.Chart;
+            this.chartButton.Image = ((System.Drawing.Image)(resources.GetObject("chartButton.Image")));
             this.chartButton.Location = new System.Drawing.Point(543, 11);
             this.chartButton.Name = "chartButton";
             this.chartButton.Size = new System.Drawing.Size(100, 100);
@@ -281,6 +195,107 @@
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Filter = "\"vib files (*.vib)|*.vib|All files (*.*)|*.*\"";
             this.openFileDialog.RestoreDirectory = true;
+            // 
+            // updateWorker
+            // 
+            this.updateWorker.WorkerReportsProgress = true;
+            this.updateWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.updateWorker_DoWork);
+            this.updateWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.updateWorker_ProgressChanged);
+            this.updateWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.updateWorker_RunWorkerCompleted);
+            // 
+            // watchlistOLV
+            // 
+            this.watchlistOLV.AllColumns.Add(this.symColumn);
+            this.watchlistOLV.AllColumns.Add(this.nameColumn);
+            this.watchlistOLV.AllColumns.Add(this.lastColumn);
+            this.watchlistOLV.AllColumns.Add(this.growthColumn);
+            this.watchlistOLV.AllColumns.Add(this.divColumn);
+            this.watchlistOLV.AllColumns.Add(this.assetColumn);
+            this.watchlistOLV.AllColumns.Add(this.bizColumn);
+            this.watchlistOLV.AllColumns.Add(this.dateColumn);
+            this.watchlistOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.watchlistOLV.BackColor = System.Drawing.Color.LightGray;
+            this.watchlistOLV.CellEditUseWholeCell = false;
+            this.watchlistOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.symColumn,
+            this.nameColumn,
+            this.lastColumn,
+            this.growthColumn,
+            this.divColumn,
+            this.assetColumn,
+            this.bizColumn,
+            this.dateColumn});
+            this.watchlistOLV.Cursor = System.Windows.Forms.Cursors.Default;
+            this.watchlistOLV.FullRowSelect = true;
+            this.watchlistOLV.GridLines = true;
+            this.watchlistOLV.ItemRenderer = this.growthPriceRenderer;
+            this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
+            this.watchlistOLV.Name = "watchlistOLV";
+            this.watchlistOLV.Size = new System.Drawing.Size(904, 395);
+            this.watchlistOLV.TabIndex = 5;
+            this.watchlistOLV.UseCompatibleStateImageBehavior = false;
+            this.watchlistOLV.View = System.Windows.Forms.View.Details;
+            this.watchlistOLV.DoubleClick += new System.EventHandler(this.watchlistOLV_DoubleClick);
+            // 
+            // symColumn
+            // 
+            this.symColumn.AspectName = "Sym";
+            this.symColumn.Groupable = false;
+            this.symColumn.Text = "Symbol";
+            this.symColumn.Width = 69;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.AspectName = "Name";
+            this.nameColumn.Groupable = false;
+            this.nameColumn.Text = "Company";
+            this.nameColumn.Width = 240;
+            // 
+            // lastColumn
+            // 
+            this.lastColumn.AspectName = "Last";
+            this.lastColumn.AspectToStringFormat = "{0:C}";
+            this.lastColumn.Text = "Price";
+            this.lastColumn.Width = 90;
+            // 
+            // growthColumn
+            // 
+            this.growthColumn.AspectName = "GEP";
+            this.growthColumn.AspectToStringFormat = "{0:C}";
+            this.growthColumn.Renderer = this.growthPriceRenderer;
+            this.growthColumn.Text = "Growth EP";
+            this.growthColumn.Width = 90;
+            // 
+            // divColumn
+            // 
+            this.divColumn.AspectName = "DEP";
+            this.divColumn.AspectToStringFormat = "{0:C}";
+            this.divColumn.Renderer = this.dividendPriceRenderer;
+            this.divColumn.Text = "Dividend EP";
+            this.divColumn.Width = 90;
+            // 
+            // assetColumn
+            // 
+            this.assetColumn.AspectName = "AEP";
+            this.assetColumn.AspectToStringFormat = "{0:C}";
+            this.assetColumn.Renderer = this.assetPriceRenderer;
+            this.assetColumn.Text = "Asset EP";
+            this.assetColumn.Width = 90;
+            // 
+            // bizColumn
+            // 
+            this.bizColumn.AspectName = "BizConf";
+            this.bizColumn.Text = "Biz Conf";
+            this.bizColumn.Width = 90;
+            // 
+            // dateColumn
+            // 
+            this.dateColumn.AspectName = "LastUpdate";
+            this.dateColumn.AspectToStringFormat = "{0:d}";
+            this.dateColumn.Text = "Last Updated";
+            this.dateColumn.Width = 122;
             // 
             // ValueInvestingForm
             // 
@@ -338,5 +353,9 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.ComponentModel.BackgroundWorker updateWorker;
+        private Renderers.GrowthPriceRenderer growthPriceRenderer;
+        private Renderers.DividendPriceRenderer dividendPriceRenderer;
+        private Renderers.AssetPriceRenderer assetPriceRenderer;
     }
 }

@@ -14,6 +14,21 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -82,6 +97,7 @@
     <Compile Include="Base\Observer.cs" />
     <Compile Include="Base\Singleton.cs" />
     <Compile Include="Base\Subject.cs" />
+    <Compile Include="Base\Threader.cs" />
     <Compile Include="Commons\Enums.cs" />
     <Compile Include="Commons\Params.cs" />
     <Compile Include="Controllers\RESTController.cs" />
@@ -101,10 +117,19 @@
     <Compile Include="Parsers\YahooFinanceParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\PriceRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\Comparer.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\Serializer.cs" />
     <Compile Include="Utils\Translator.cs" />
+    <Compile Include="Views\InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\StockProfilingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +155,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\StockProfilingForm.resx">
       <DependentUpon>StockProfilingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +207,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\Trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

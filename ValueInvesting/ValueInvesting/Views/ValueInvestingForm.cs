@@ -15,6 +15,7 @@ using ValueInvesting.Parsers;
 using ValueInvesting.Views;
 using ValueInvesting.Utils;
 using System.IO;
+using System.Collections;
 
 namespace ValueInvesting.Views
 {
@@ -29,16 +30,16 @@ namespace ValueInvesting.Views
             this.ActiveControl = this.tickTxtbox;
         }
 
-        private void StockQuery(Stock aStock, Enums.Market aMkt = Enums.Market.US)
+        private void StockQuery( Stock aStock, Boolean Editable = false, Boolean Save = false )
         {
             String nYahooQueryStr = YahooFinanceParser.QUERY_STR;
             String nYahooSymbol = aStock.Sym;
             String nMorningSymbol = aStock.Sym;
 
-            if ( aMkt == Enums.Market.SG )
+            if ( aStock.Market == Enums.Market.SG )
             {
                 nYahooSymbol = nYahooSymbol + ".SI";
-                nMorningSymbol = "XSES:" +  nMorningSymbol;
+                nMorningSymbol = "XSES:" + nMorningSymbol;
             }
 
             nYahooQueryStr = nYahooQueryStr.Replace( "@TICK", nYahooSymbol );
@@ -64,10 +65,18 @@ namespace ValueInvesting.Views
 
             aStock.LastUpdate = DateTime.Now;
 
-            StockProfilingForm nForm = new StockProfilingForm( aStock );
-            nForm.Show();
+            if ( Editable )
+            {
+                StockProfilingForm nForm = new StockProfilingForm( aStock );
+                nForm.Show();
+            }
+
+            if ( Save )
+            {
+                WatchlistController.getInstance().Add( aStock );
+            }
         }
-        
+
         private void New()
         {
             WatchlistController.getInstance().Clear();
@@ -97,7 +106,7 @@ namespace ValueInvesting.Views
                     }
                 }
 
-                Serializer.SaveListToFile<Stock>( WatchlistController.getInstance().GetModel().GetList(),this.Filename );
+                Serializer.SaveListToFile<Stock>( WatchlistController.getInstance().GetModel().GetList(), this.Filename );
 
                 return true;
             }
@@ -117,7 +126,7 @@ namespace ValueInvesting.Views
                     if ( nResult == DialogResult.OK )
                     {
                         WatchlistController.getInstance().Clear();
-                        WatchlistController.getInstance().Add( Serializer.GetListFromFile<Stock>( openFileDialog.FileName ));
+                        WatchlistController.getInstance().Add( Serializer.GetListFromFile<Stock>( openFileDialog.FileName ) );
                         this.Filename = openFileDialog.FileName;
                         return true;
                     }
@@ -137,6 +146,21 @@ namespace ValueInvesting.Views
         }
         #endregion
 
+        #region Delegates
+        delegate void UpdateTitleDelegate( String aText );
+
+        private void UpdateTitleSafe( String aText )
+        {
+            this.Text = aText;
+        }
+
+        public void UpdateTitle( String aText )
+        {
+            UpdateTitleDelegate updateTextDelegate = new UpdateTitleDelegate( UpdateTitleSafe );
+            this.Invoke( updateTextDelegate, new object[] { aText } );
+        }
+        #endregion
+
         private void tickTxtbox_KeyPress( object sender, KeyPressEventArgs e )
         {
             if ( e.KeyChar == Convert.ToChar( Keys.Return ) )
@@ -148,11 +172,13 @@ namespace ValueInvesting.Views
 
                 if ( WatchlistController.getInstance().isExist( this.tickTxtbox.Text ) )
                 {
-                    this.StockQuery( WatchlistController.getInstance().GetStock( this.tickTxtbox.Text ), nMkt );
+                    this.StockQuery( WatchlistController.getInstance().GetStock( this.tickTxtbox.Text ), true );
                 }
                 else
                 {
-                    this.StockQuery( new Stock( this.tickTxtbox.Text ), nMkt );
+                    Stock nStock = new Stock( this.tickTxtbox.Text );
+                    nStock.Market = nMkt;
+                    this.StockQuery( nStock, true );
                 }
             }
         }
@@ -162,7 +188,13 @@ namespace ValueInvesting.Views
             if ( watchlistOLV.SelectedItems.Count == 1 )
             {
                 Stock nStock = (Stock) watchlistOLV.SelectedObject;
-                this.StockQuery( nStock, Translator.MarketStringToEnum(nStock.Mkt) );
+                if ( nStock.LastUpdate.Date == DateTime.Now.Date )
+                {
+                    StockProfilingForm nForm = new StockProfilingForm( nStock );
+                    nForm.Show();
+                }
+                else
+                    this.StockQuery( nStock, true );
             }
         }
 
@@ -183,22 +215,56 @@ namespace ValueInvesting.Views
 
         private void updateButton_Click( object sender, EventArgs e )
         {
-
+            if ( WatchlistController.getInstance().GetModel().Size() > 0 )
+            {
+                updateWorker.RunWorkerAsync( WatchlistController.getInstance().GetModel().GetList() );
+            }
         }
 
         private void trashButton_Click( object sender, EventArgs e )
         {
-
+            if ( watchlistOLV.SelectedItems.Count > 0 )
+            {
+                WatchlistController.getInstance().Delete( (ArrayList) watchlistOLV.SelectedObjects );
+            }
         }
 
         private void chartButton_Click( object sender, EventArgs e )
         {
-
+            MessageBox.Show( "Chart Not Available for this version!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
         }
 
         private void infoButton_Click( object sender, EventArgs e )
         {
+            InfoForm nForm = new InfoForm();
+            nForm.ShowDialog();
+        }
 
+        private void updateWorker_DoWork( object sender, DoWorkEventArgs e )
+        {
+            List<Stock> nStocks = (List<Stock>) e.Argument;
+            this.UpdateTitle( String.Format( "Value Investing - Update {0}/{1}", 0, nStocks.Count ));
+
+            int i = 0;
+            foreach ( Stock nStock in nStocks )
+            {
+                if ( nStock.LastUpdate.Date != DateTime.Now.Date )
+                    this.StockQuery( nStock );
+                this.updateWorker.ReportProgress( ++i, nStock );
+            }
+        }
+
+        private void updateWorker_ProgressChanged( object sender, ProgressChangedEventArgs e )
+        {
+            this.watchlistOLV.RefreshObject( e.UserState );
+            this.UpdateTitle(String.Format( "Value Investing - Update {0}/{1}", e.ProgressPercentage, this.watchlistOLV.GetItemCount() ));
+        }
+
+        private void updateWorker_RunWorkerCompleted( object sender, RunWorkerCompletedEventArgs e )
+        {
+            //this.watchlistOLV.Invalidate();
+            this.UpdateTitle( String.Format( "Value Investing"));
+            MessageBox.Show( "Update Completed!", "Value Investing Info", MessageBoxButtons.OK, MessageBoxIcon.Information );
         }
     }
 }

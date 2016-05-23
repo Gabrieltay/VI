@@ -61,7 +61,10 @@ namespace ValueInvesting.Parsers
                     this.mStock.Sym = this.mStock.Sym.Remove( this.mStock.Sym.IndexOf( "." ), this.mStock.Sym.Length - this.mStock.Sym.IndexOf( "." ) );
             }
             if ( nDataArray[3] != "N/A" )
-                this.mStock.Mkt = Translator.MarketCodeToString(nDataArray[3].Replace( "\"", "" ).Replace("\n",""));
+            {
+                this.mStock.Mkt = Translator.MarketCodeToString( nDataArray[3].Replace( "\"", "" ).Replace( "\n", "" ) );
+                this.mStock.Market = Translator.MarketStringToEnum( this.mStock.Mkt );
+            }
             //if ( nDataArray[4] != "N/A" )
             //    this.mStock.BookValue = Double.Parse( nDataArray[4] );
             //if ( nDataArray[5] != "N/A" )

@@ -31,6 +31,11 @@ namespace ValueInvesting.Models
             get; set;
         }
 
+        public Enums.Market Market
+        {
+            get; set;
+        }
+
         public String Sym
         {
             get; set;
