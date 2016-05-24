@@ -111,12 +111,16 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\CandleStick.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Stock.cs" />
+    <Compile Include="Models\StockProfile.cs" />
     <Compile Include="Models\DataModel.cs" />
+    <Compile Include="Models\StockData.cs" />
     <Compile Include="Observers\WatchlistObserver.cs" />
     <Compile Include="Parsers\AbstractParser.cs" />
     <Compile Include="Parsers\MorningStarParser.cs" />
+    <Compile Include="Parsers\YahooFinanceDownloader.cs" />
     <Compile Include="Parsers\YahooFinanceParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,7 +30,7 @@ namespace ValueInvesting.Views
             this.ActiveControl = this.tickTxtbox;
         }
 
-        private void StockQuery( Stock aStock, Boolean Editable = false, Boolean Save = false )
+        private void StockQuery( StockProfile aStock, Boolean Editable = false, Boolean Save = false )
         {
             String nYahooQueryStr = YahooFinanceParser.QUERY_STR;
             String nYahooSymbol = aStock.Sym;
@@ -77,6 +77,58 @@ namespace ValueInvesting.Views
             }
         }
 
+        private void StockDownload(StockData aStockData)
+        {
+            String nYahooDownloadStr = "";
+
+            String nDatafile = aStockData.Sym + "-" + aStockData.Market.ToString() + ".bin";
+
+            Boolean nExists = false;
+
+            if ( !Directory.Exists( @"data" ) )
+                Directory.CreateDirectory( @"data" );
+
+            if ( !File.Exists( @"data/" + nDatafile ) )
+            {
+                nYahooDownloadStr = YahooFinanceDownloader.QUERY_FULL_STR; 
+            }
+            else
+            {
+                aStockData = Serializer.GetObjectFromFile<StockData>( @"data/" + nDatafile );
+
+                nYahooDownloadStr = YahooFinanceDownloader.QUERY_PARTIAL_STR;
+
+                if ( aStockData.LastDate.Date == DateTime.Now.Date )
+                {
+                    return; // No need update again
+                }
+
+                DateTime nStartDate = aStockData.LastDate.AddDays( 1 );
+                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SD", nStartDate.Day.ToString() );
+                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SM", (nStartDate.Month-1).ToString() );
+                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SY", nStartDate.Year.ToString() );
+            }
+
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", DateTime.Now.Day.ToString() );
+            //nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", "2" );
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EM", (DateTime.Now.Month-1).ToString() );
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EY", DateTime.Now.Year.ToString() );
+
+            String nYahooSymbol = aStockData.Sym;
+            if ( aStockData.Market == Enums.Market.SG )
+            {
+                nYahooSymbol = nYahooSymbol + ".SI";
+            }
+
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@TICK", nYahooSymbol );
+
+            String nYahooOutStr = RESTController.GetREST( nYahooDownloadStr );
+            YahooFinanceDownloader nDownloader = new YahooFinanceDownloader( aStockData );
+            nDownloader.StartCSV( nYahooOutStr );
+
+            Serializer.SaveObjectToFile<StockData>( aStockData, @"data/" + nDatafile );
+        }
+
         private void New()
         {
             WatchlistController.getInstance().Clear();
@@ -106,7 +158,7 @@ namespace ValueInvesting.Views
                     }
                 }
 
-                Serializer.SaveListToFile<Stock>( WatchlistController.getInstance().GetModel().GetList(), this.Filename );
+                Serializer.SaveListToFile<StockProfile>( WatchlistController.getInstance().GetModel().GetList(), this.Filename );
 
                 return true;
             }
@@ -126,7 +178,7 @@ namespace ValueInvesting.Views
                     if ( nResult == DialogResult.OK )
                     {
                         WatchlistController.getInstance().Clear();
-                        WatchlistController.getInstance().Add( Serializer.GetListFromFile<Stock>( openFileDialog.FileName ) );
+                        WatchlistController.getInstance().Add( Serializer.GetListFromFile<StockProfile>( openFileDialog.FileName ) );
                         this.Filename = openFileDialog.FileName;
                         return true;
                     }
@@ -176,7 +228,7 @@ namespace ValueInvesting.Views
                 }
                 else
                 {
-                    Stock nStock = new Stock( this.tickTxtbox.Text );
+                    StockProfile nStock = new StockProfile( this.tickTxtbox.Text );
                     nStock.Market = nMkt;
                     this.StockQuery( nStock, true );
                 }
@@ -187,7 +239,7 @@ namespace ValueInvesting.Views
         {
             if ( watchlistOLV.SelectedItems.Count == 1 )
             {
-                Stock nStock = (Stock) watchlistOLV.SelectedObject;
+                StockProfile nStock = (StockProfile) watchlistOLV.SelectedObject;
                 if ( nStock.LastUpdate.Date == DateTime.Now.Date )
                 {
                     StockProfilingForm nForm = new StockProfilingForm( nStock );
@@ -231,7 +283,17 @@ namespace ValueInvesting.Views
 
         private void chartButton_Click( object sender, EventArgs e )
         {
-            MessageBox.Show( "Chart Not Available for this version!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+            //MessageBox.Show( "Chart Not Available for this version!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+            if ( watchlistOLV.SelectedItems.Count == 1 )
+            {
+                StockProfile nStock = (StockProfile)watchlistOLV.SelectedObject;
+                StockData nStockData = new StockData();
+                nStockData.Name = nStock.Name;
+                nStockData.Sym = nStock.Sym;
+                nStockData.Mkt = nStock.Mkt;
+                nStockData.Market = nStock.Market;
+                this.StockDownload( nStockData );
+            }
         }
 
         private void infoButton_Click( object sender, EventArgs e )
@@ -242,11 +304,11 @@ namespace ValueInvesting.Views
 
         private void updateWorker_DoWork( object sender, DoWorkEventArgs e )
         {
-            List<Stock> nStocks = (List<Stock>) e.Argument;
+            List<StockProfile> nStocks = (List<StockProfile>) e.Argument;
             this.UpdateTitle( String.Format( "Value Investing - Update {0}/{1}", 0, nStocks.Count ));
 
             int i = 0;
-            foreach ( Stock nStock in nStocks )
+            foreach ( StockProfile nStock in nStocks )
             {
                 if ( nStock.LastUpdate.Date != DateTime.Now.Date )
                     this.StockQuery( nStock );

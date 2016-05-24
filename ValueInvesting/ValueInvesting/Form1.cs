@@ -26,7 +26,7 @@ namespace ValueInvesting
 
         private void button1_Click( object sender, EventArgs e )
         {
-            Stock nStock = new Stock( textBox1.Text );
+            StockProfile nStock = new StockProfile( textBox1.Text );
             String nYahooQueryStr = YahooFinanceParser.QUERY_STR;
             nYahooQueryStr = nYahooQueryStr.Replace( "@TICK", textBox1.Text );
 

@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ValueInvesting.Commons;
 
 namespace ValueInvesting.Models
 {
     [Serializable]
-    public class Stock
+    public class StockData : Stock
     {
-        public String Name
+        public StockData()
+        {
+            this.DataPoints = new List<CandleStick>();
+        }
+
+        public DateTime StartDate
         {
             get; set;
         }
 
-        public String Mkt
+        public DateTime LastDate
         {
             get; set;
         }
 
-        public Enums.Market Market
-        {
-            get; set;
-        }
-
-        public String Sym
+        public List<CandleStick> DataPoints
         {
             get; set;
         }

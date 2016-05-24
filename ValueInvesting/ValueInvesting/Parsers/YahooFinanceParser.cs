@@ -32,7 +32,7 @@ namespace ValueInvesting.Parsers
 
         private const String PROFILE_XPATH = "//div[@id=\"screen\"]/div[@id=\"rightcol\"]/table[2]/tr[2]/td[1]/p[1]";
 
-        public YahooFinanceParser( Stock aStock )
+        public YahooFinanceParser( StockProfile aStock )
         {
             this.mStock = aStock;
         }
@@ -87,7 +87,7 @@ namespace ValueInvesting.Parsers
             return true;
         }
 
-        private Stock mStock
+        private StockProfile mStock
         {
             get; set;
         }

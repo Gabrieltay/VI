@@ -13,15 +13,15 @@ namespace ValueInvesting.Controllers
     {
         public void Init()
         {
-            this.Init( new DataModel<Stock>() );
+            this.Init( new DataModel<StockProfile>() );
         }
 
-        public void Init( DataModel<Stock> aModel )
+        public void Init( DataModel<StockProfile> aModel )
         {
             this.StockModel = aModel;
         }
 
-        public void Add( Stock aStock )
+        public void Add( StockProfile aStock )
         {
             if ( isExist( aStock ) )
             {
@@ -31,17 +31,17 @@ namespace ValueInvesting.Controllers
             this.StockModel.Add( aStock );
         }
 
-        public void Add( List<Stock> aStockList )
+        public void Add( List<StockProfile> aStockList )
         {
             this.StockModel.Add( aStockList );
         }
 
-        public void Edit( Stock aStock )
+        public void Edit( StockProfile aStock )
         {
             this.StockModel.Edit( aStock );
         }
 
-        public void Delete(Stock aStock)
+        public void Delete(StockProfile aStock)
         {
             this.StockModel.Remove( aStock );
         }
@@ -56,9 +56,9 @@ namespace ValueInvesting.Controllers
             this.StockModel.Clear();
         }
 
-        public Boolean isExist(Stock aStock)
+        public Boolean isExist(StockProfile aStock)
         {
-            foreach ( Stock nStock in this.StockModel.GetList() )
+            foreach ( StockProfile nStock in this.StockModel.GetList() )
             {
                 if ( nStock.Sym == aStock.Sym && nStock.Mkt == aStock.Mkt )
                     return true;
@@ -68,7 +68,7 @@ namespace ValueInvesting.Controllers
 
         public Boolean isExist(String aSymbol)
         {
-            foreach ( Stock nStock in this.StockModel.GetList() )
+            foreach ( StockProfile nStock in this.StockModel.GetList() )
             {
                 if ( nStock.Sym == aSymbol )
                     return true;
@@ -76,9 +76,9 @@ namespace ValueInvesting.Controllers
             return false;
         }
 
-        public Stock GetStock(String aSymbol)
+        public StockProfile GetStock(String aSymbol)
         {
-            foreach ( Stock nStock in this.StockModel.GetList() )
+            foreach ( StockProfile nStock in this.StockModel.GetList() )
             {
                 if ( nStock.Sym == aSymbol )
                     return nStock;
@@ -86,9 +86,9 @@ namespace ValueInvesting.Controllers
             return null;
         }
 
-        public Stock GetStock(String aSymbol, String aMarket)
+        public StockProfile GetStock(String aSymbol, String aMarket)
         {
-            foreach ( Stock nStock in this.StockModel.GetList() )
+            foreach ( StockProfile nStock in this.StockModel.GetList() )
             {
                 if ( nStock.Sym == aSymbol && nStock.Mkt == aMarket )
                     return nStock;
@@ -106,13 +106,13 @@ namespace ValueInvesting.Controllers
             this.StockModel.Unsubscribe( aObserver );
         }
 
-        public DataModel<Stock> GetModel()
+        public DataModel<StockProfile> GetModel()
         {
             return this.StockModel;
         }
 
         #region Properties
-        private DataModel<Stock> StockModel
+        private DataModel<StockProfile> StockModel
         {
             get;
             set;

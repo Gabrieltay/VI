@@ -14,7 +14,7 @@ namespace ValueInvesting.Views
 {
     public partial class StockProfilingForm : Form
     {
-        public StockProfilingForm(Stock aStock)
+        public StockProfilingForm(StockProfile aStock)
         {
             this.mStock = aStock;
             InitializeComponent();
@@ -71,7 +71,7 @@ namespace ValueInvesting.Views
             this.bizConLabel.Text = nBizConf.ToString();
         }
 
-        private Stock mStock
+        private StockProfile mStock
         {
             get; set;
         }

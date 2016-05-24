@@ -13,7 +13,7 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            Stock nStock = (Stock) this.RowObject;
+            StockProfile nStock = (StockProfile) this.RowObject;
             if ( nStock.GEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );
@@ -28,7 +28,7 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            Stock nStock = (Stock) this.RowObject;
+            StockProfile nStock = (StockProfile) this.RowObject;
             if ( nStock.DEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );
@@ -43,7 +43,7 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            Stock nStock = (Stock) this.RowObject;
+            StockProfile nStock = (StockProfile) this.RowObject;
             if ( nStock.AEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );

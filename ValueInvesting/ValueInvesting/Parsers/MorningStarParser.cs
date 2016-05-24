@@ -13,7 +13,7 @@ namespace ValueInvesting.Parsers
     {
         public const String QUERY_STR = "http://financials.morningstar.com/ajax/exportKR2CSV.html?t=@TICK";
 
-        public MorningStarParser( Stock aStock )
+        public MorningStarParser( StockProfile aStock )
         {
             this.mStock = aStock;
         }
@@ -217,7 +217,7 @@ namespace ValueInvesting.Parsers
             this.mStock.DEP = this.mStock.Dividend / Params.DIVIDEND_THRESHOLD;
         }
 
-        private Stock mStock
+        private StockProfile mStock
         {
             get; set;
         }
