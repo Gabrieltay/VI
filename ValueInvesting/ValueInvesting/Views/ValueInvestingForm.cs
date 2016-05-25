@@ -77,7 +77,7 @@ namespace ValueInvesting.Views
             }
         }
 
-        private void StockDownload(StockData aStockData)
+        private void StockDownload(ref StockData aStockData)
         {
             String nYahooDownloadStr = "";
 
@@ -103,13 +103,13 @@ namespace ValueInvesting.Views
                     return; // No need update again
                 }
 
-                DateTime nStartDate = aStockData.LastDate.AddDays( 1 );
+                DateTime nStartDate = aStockData.LastDate;//.AddDays( 1 );
                 nYahooDownloadStr = nYahooDownloadStr.Replace( "@SD", nStartDate.Day.ToString() );
                 nYahooDownloadStr = nYahooDownloadStr.Replace( "@SM", (nStartDate.Month-1).ToString() );
                 nYahooDownloadStr = nYahooDownloadStr.Replace( "@SY", nStartDate.Year.ToString() );
             }
 
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", DateTime.Now.Day.ToString() );
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", (DateTime.Now.Day).ToString() );
             //nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", "2" );
             nYahooDownloadStr = nYahooDownloadStr.Replace( "@EM", (DateTime.Now.Month-1).ToString() );
             nYahooDownloadStr = nYahooDownloadStr.Replace( "@EY", DateTime.Now.Year.ToString() );
@@ -292,7 +292,13 @@ namespace ValueInvesting.Views
                 nStockData.Sym = nStock.Sym;
                 nStockData.Mkt = nStock.Mkt;
                 nStockData.Market = nStock.Market;
-                this.StockDownload( nStockData );
+                this.StockDownload( ref nStockData );
+
+                if ( nStockData.DataPoints.Count > 0 )
+                {
+                    ChartingForm nForm = new ChartingForm( nStockData );
+                    nForm.Show();
+                }
             }
         }
 
