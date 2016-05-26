@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ValueInvesting.Models;
+using ValueInvesting.Utils;
 using ZedGraph;
 
 namespace ValueInvesting.Views
@@ -28,7 +29,10 @@ namespace ValueInvesting.Views
 
             InitializeComponent();
             InitializeZedGraph();
+            DrawSmaGraph(20, Color.Red);
+            DrawSmaGraph(50, Color.Blue);
             DrawCandleStickGraph();
+
         }
 
         private void InitializeZedGraph()
@@ -48,7 +52,9 @@ namespace ValueInvesting.Views
             myPane.Title.FontSpec.Family = "Century Gothic";
 
             // Legend
-            myPane.Legend.IsVisible = false;
+            myPane.Legend.IsVisible = true;
+            myPane.Legend.FontSpec.FontColor = this.FnColor;
+            myPane.Legend.Fill = new Fill( this.BgColor );
 
             // XAxis
             myPane.XAxis.Title.Text = "";
@@ -75,7 +81,7 @@ namespace ValueInvesting.Views
         {
             GraphPane myPane = this.CandleStickGraph.GraphPane;
 
-            JapaneseCandleStickItem myCurve = myPane.AddJapaneseCandleStick( "Trades", this.SPList );
+            JapaneseCandleStickItem myCurve = myPane.AddJapaneseCandleStick( "", this.SPList );
             myCurve.Stick.IsAutoSize = true;
             myCurve.Stick.RisingFill = new Fill( RiseColor );
             myCurve.Stick.RisingBorder = new Border( RiseColor, 1 );
@@ -84,9 +90,31 @@ namespace ValueInvesting.Views
             myCurve.Stick.Color = RiseColor;
             myCurve.Stick.FallingColor = FallColor;
 
-            this.CandleStickGraph.AxisChange(); 
+            this.CandleStickGraph.AxisChange();
             myPane.XAxis.Scale.Min = myPane.XAxis.Scale.Max - 50;
             this.AutoAxisScale();
+        }
+
+        private void DrawSmaGraph( int aPeriod, Color aLineColor )
+        {
+            int count = 0;
+            double[] nSma = TAUtil.SMA( this.Stock, aPeriod );
+
+            PointPairList list = new PointPairList();
+            for ( int i = 0; i < nSma.Length; i++ )
+            {
+                double x = (double)new XDate( this.Stock.DataPoints[i].Date );
+                double y = nSma[i];
+
+                list.Add( x, y );
+            }
+
+            GraphPane myPane = this.CandleStickGraph.GraphPane;
+
+            LineItem myCurve = myPane.AddCurve( "SMA" + aPeriod.ToString(), list, aLineColor );
+            myCurve.Symbol.IsAntiAlias = true;
+            myCurve.Symbol.IsVisible = false;
+            this.CandleStickGraph.AxisChange();
         }
 
         private void AutoAxisScale()
@@ -140,6 +168,7 @@ namespace ValueInvesting.Views
             get; set;
         }
 
+
         #region Colors
         private Color FallColor
         {
@@ -169,7 +198,7 @@ namespace ValueInvesting.Views
         {
             get
             {
-                return Color.WhiteSmoke; 
+                return Color.WhiteSmoke;
             }
         }
 
