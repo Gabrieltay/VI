@@ -124,6 +124,7 @@
     <Compile Include="Models\CandleStick.cs" />
     <Compile Include="Models\MacdPoint.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Stoch.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\StockProfile.cs" />
     <Compile Include="Models\DataModel.cs" />

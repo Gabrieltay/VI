@@ -17,18 +17,18 @@ namespace ValueInvesting.Utils
             double[] nInReal = getCloseValues( aStock );
             int nOutBegIdx;
             int nOutNBElement;
-            double[] nOutReal = new double[nEndIndex - nStartIndex - aPeriod + 2];
+            double[] nOutReal = new double[nEndIndex - nStartIndex + 1];
 
             TicTacTec.TA.Library.Core.Sma( nStartIndex, nEndIndex, nInReal, aPeriod, out nOutBegIdx, out nOutNBElement, nOutReal );
 
-            double[] nOuput = new double[nEndIndex - nStartIndex + 1];
-            nOutReal.CopyTo( nOuput, aPeriod - 1 );
-            return nOuput;
+            double[] nOutput = new double[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutReal, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            return nOutput;
         }
 
         public static List<MacdPoint> MACD( StockData aStock, int aFastPeriod, int aSlowPeriod, int aSignalPeriod )
         {
-            List<MacdPoint> nMacRes = new List<MacdPoint>();
             int nStartIndex = 0;
             int nEndIndex = aStock.DataPoints.Count - 1;
             double[] nInReal = getCloseValues( aStock );
@@ -40,7 +40,13 @@ namespace ValueInvesting.Utils
 
             TicTacTec.TA.Library.Core.Macd( nStartIndex, nEndIndex, nInReal, aFastPeriod, aSlowPeriod, aSignalPeriod, out nOutBegIdx, out nOutNBElement, nOutMACD, nOutMACDSignal, nOutMACDHist );
 
-            for ( int i = nStartIndex; i < nEndIndex - nStartIndex + 1;  i++)
+            List<MacdPoint> nOutput = new List<MacdPoint>();
+            for ( int j = 0; j < nOutBegIdx; j++ )
+            {
+                nOutput.Add( new MacdPoint() );
+            }
+
+            for ( int i = nStartIndex; i < nEndIndex - nStartIndex + 1 - nOutBegIdx; i++ )
             {
                 MacdPoint nMacdPt = new MacdPoint();
                 nMacdPt.Index = i;
@@ -49,24 +55,78 @@ namespace ValueInvesting.Utils
                 nMacdPt.MacdHistogram = nOutMACDHist[i];
                 if ( i > 0 )
                     nMacdPt.Bullish = ( nOutMACDHist[i] > nOutMACDHist[i - 1] ) ? 1 : 0;
-                nMacRes.Add( nMacdPt );
-                 
+                nOutput.Add( nMacdPt );
             }
-            nMacRes.RemoveRange( nEndIndex - 32, 33 );
-
-            List<MacdPoint> nOutput = new List<MacdPoint>();
-            for (int j = 0; j < 33; j++ )
-            {
-                nOutput.Add( new MacdPoint() );
-            }
-
-            nOutput.AddRange( nMacRes );
             return nOutput;
         }
 
-        private static double[] getCloseValues( StockData nStock )
+        public static List<Stoch> Stochastic( StockData aStock, int aFastKPeriod, int aSlowKPeriod, int aSlowDPeriod )
         {
-            return nStock.DataPoints.Select( x => x.Close ).ToArray();
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            double[] nOutSlowK = new double[nEndIndex - nStartIndex + 1]; 
+            double[] nOutSlowD = new double[nEndIndex - nStartIndex + 1]; 
+            TicTacTec.TA.Library.Core.Stoch( nStartIndex, nEndIndex, nInHigh, nInLow, nInClose,
+                aFastKPeriod, aSlowKPeriod, Core.MAType.Sma, aSlowDPeriod, Core.MAType.Sma, out nOutBegIdx, out nOutNBElement, nOutSlowK, nOutSlowD );
+
+            List<Stoch> nOutput = new List<Stoch>();
+
+            for ( int j = 0; j < nOutBegIdx; j++ )
+            {
+                nOutput.Add( new Stoch() );
+            }
+
+            for ( int i = nStartIndex; i < nEndIndex - nStartIndex + 1 - nOutBegIdx; i++ )
+            {
+                Stoch nStoch = new Stoch();
+                nStoch.SlowK = nOutSlowK[i];
+                nStoch.SlowD = nOutSlowD[i];
+                nOutput.Add( nStoch );
+            }
+
+            return nOutput;
+        }
+
+        public static double[] EMA(StockData aStock, int aTimePeriod)
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInClose = getCloseValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            double[] nOutReal = new double[nEndIndex - nStartIndex + 1]; ;
+            TicTacTec.TA.Library.Core.Ema( nStartIndex, nEndIndex, nInClose, aTimePeriod, out nOutBegIdx, out nOutNBElement, nOutReal );
+
+            for(int i = 0; i < nOutReal.Length; i++ )
+            {
+                if ( nOutReal[i] == 0 )
+                    continue;
+            }
+
+            double[] nOutput = new double[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutReal, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            return nOutput;
+        }
+
+        private static double[] getCloseValues( StockData aStock )
+        {
+            return aStock.DataPoints.Select( x => x.Close ).ToArray();
+        }
+
+        private static double[] getHighValues( StockData aStock )
+        {
+            return aStock.DataPoints.Select( x => x.High ).ToArray();
+        }
+
+        private static double[] getLowValues( StockData aStock )
+        {
+            return aStock.DataPoints.Select( x => x.Low ).ToArray();
         }
     }
 }

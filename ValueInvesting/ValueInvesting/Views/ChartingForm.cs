@@ -47,6 +47,7 @@ namespace ValueInvesting.Views
             DrawSmaGraph( this.mCandleStickPane, 50, Color.Blue );
             DrawCandleStickGraph( this.mCandleStickPane );
             DrawMacdGraph( this.mMacdPane, 12, 26, 9, Color.Blue, Color.Red );
+            DrawStochPane( this.mStochasticPane, 14, 3, 3, Color.Blue, Color.Red );
 
             this.ZedGraphControl.AxisChange();
             this.ZedGraphControl.Dock = DockStyle.Fill;
@@ -58,25 +59,30 @@ namespace ValueInvesting.Views
             this.ZedGraphControl.IsAntiAlias = true;
             this.ZedGraphControl.IsEnableVPan = false;
             this.ZedGraphControl.IsEnableVZoom = false;
-            this.ZedGraphControl.IsSynchronizeXAxes = true;  
-
+            this.ZedGraphControl.IsSynchronizeXAxes = true;
+            
             this.ZedGraphControl.MasterPane.Add( this.mCandleStickPane );
             this.ZedGraphControl.MasterPane.Add( this.mMacdPane );
+            this.ZedGraphControl.MasterPane.Add( this.mStochasticPane );
+            this.ZedGraphControl.MasterPane.Fill = new Fill( this.BgColor );
+
             using ( Graphics g = ZedGraphControl.CreateGraphics() )
             {
-                this.ZedGraphControl.MasterPane.SetLayout( g, PaneLayout.SingleColumn );
+                this.ZedGraphControl.MasterPane.SetLayout( g, true, new int[] { 1, 1, 1 }, new float[] { 6f, 2f, 2f } );
+                //this.ZedGraphControl.MasterPane.SetLayout( g, PaneLayout.SingleColumn );
+                this.ZedGraphControl.MasterPane.InnerPaneGap = 3f;
                 this.ZedGraphControl.MasterPane.ReSize( g, new RectangleF( 0, 0, this.ZedGraphControl.Width, this.ZedGraphControl.Height ) );
             }
         }
 
-        private void InitializeGraphPane( GraphPane myPane)
-        { 
-            
+        private void InitializeGraphPane( GraphPane myPane, String aGraphName )
+        {
+
             myPane.Chart.Fill = new Fill( this.BgColor );
             myPane.Fill = new Fill( this.BgColor );
 
             // Title
-            myPane.Title.Text = this.Stock.Name;
+            myPane.Title.Text = aGraphName;
             myPane.Title.FontSpec.FontColor = this.FnColor;
             myPane.Title.FontSpec.Family = "Century Gothic";
 
@@ -104,11 +110,23 @@ namespace ValueInvesting.Views
             myPane.YAxis.Scale.MaxAuto = false;
             myPane.YAxis.Scale.MinAuto = false;
             myPane.YAxis.MajorGrid.IsVisible = true;
+
+            myPane.Border.IsVisible = false;
         }
 
-        private void DrawCandleStickGraph(GraphPane myPane)
+        private void AdjustSmallerPane( GraphPane myPane )
         {
-            InitializeGraphPane( myPane );
+            myPane.Title.FontSpec.Size = 24f;
+            myPane.Legend.FontSpec.Size = 24f;
+            myPane.YAxis.Scale.FontSpec.Size = 24f;
+            myPane.XAxis.IsVisible = false;
+            myPane.Margin.Left *= 4.5f;
+            myPane.Margin.Right *= 9.5f;
+        }
+
+        private void DrawCandleStickGraph( GraphPane myPane )
+        {
+            InitializeGraphPane( myPane, this.Stock.Name );
             JapaneseCandleStickItem myCurve = myPane.AddJapaneseCandleStick( "", this.SPList );
             myCurve.Stick.IsAutoSize = true;
             myCurve.Stick.RisingFill = new Fill( RiseColor );
@@ -119,13 +137,13 @@ namespace ValueInvesting.Views
             myCurve.Stick.FallingColor = FallColor;
 
             this.OriginalXAxisScale( myPane );
-            this.AutoCandlestickAxisScale(myPane);
+            this.AutoCandlestickAxisScale( myPane );
         }
 
         private void DrawSmaGraph( GraphPane myPane, int aPeriod, Color aLineColor )
         {
-            InitializeGraphPane( myPane );
-            int count = 0;
+            InitializeGraphPane( myPane, this.Stock.Name );
+
             double[] nSma = TAUtil.SMA( this.Stock, aPeriod );
 
             PointPairList list = new PointPairList();
@@ -145,9 +163,9 @@ namespace ValueInvesting.Views
             this.AutoCandlestickAxisScale( myPane );
         }
 
-        private void DrawMacdGraph(GraphPane myPane, int aFastPeriod, int aShortPeriod, int aSignalPeriod, Color aMacdColor, Color aSignalColor)
+        private void DrawMacdGraph( GraphPane myPane, int aFastPeriod, int aShortPeriod, int aSignalPeriod, Color aMacdColor, Color aSignalColor )
         {
-            InitializeGraphPane( myPane );
+            InitializeGraphPane( myPane, "MACD Histogram" );
             this.MACDList = TAUtil.MACD( this.Stock, aFastPeriod, aShortPeriod, aSignalPeriod );
 
             PointPairList nMacdList = new PointPairList();
@@ -165,7 +183,7 @@ namespace ValueInvesting.Views
                 nHistoList.Add( x, v, w );
             }
 
-            LineItem myCurve = myPane.AddCurve( "MACD(" + aShortPeriod.ToString()+","+aFastPeriod.ToString()+")", nMacdList, aMacdColor );
+            LineItem myCurve = myPane.AddCurve( "MACD(" + aShortPeriod.ToString() + "," + aFastPeriod.ToString() + ")", nMacdList, aMacdColor );
             LineItem myCurve2 = myPane.AddCurve( "Signal(" + aSignalPeriod.ToString() + ")", nSignalList, aSignalColor );
             BarItem myBar = myPane.AddBar( "MACD Histogram", nHistoList, Color.BlueViolet );
 
@@ -181,12 +199,55 @@ namespace ValueInvesting.Views
             myBar.Bar.Fill = nFillColors;
             myBar.Bar.Fill.Type = FillType.GradientByZ;
 
-            //myBar.Bar.Border = new Border( false, Color.Transparent, 0 ); 
+            this.AdjustSmallerPane( myPane );
+
             this.OriginalXAxisScale( myPane );
             this.AutoMacdAxisScale( myPane );
         }
 
-        private void OriginalXAxisScale(GraphPane myPane)
+        private void DrawStochPane( GraphPane myPane, int aFastKPeriod, int aSlowKPeriod, int aSlowDPeriod, Color aSlowKColor, Color aSlowDColor )
+        {
+            InitializeGraphPane( myPane, "Stochastic" );
+
+            myPane.YAxis.Scale.Max = 100;
+            myPane.YAxis.Scale.Min = 0;
+
+            this.StochList = TAUtil.Stochastic( this.Stock, aFastKPeriod, aSlowKPeriod, aSlowDPeriod );
+            PointPairList nSlowKList = new PointPairList();
+            PointPairList nSlowDList = new PointPairList();
+            PointPairList nHalfList = new PointPairList();
+            for ( int i = 0; i < this.StochList.Count; i++ )
+            {
+                double x = (double)new XDate( this.Stock.DataPoints[i].Date );
+                double y = this.StochList[i].SlowK;
+                double z = this.StochList[i].SlowD;
+                nSlowKList.Add( x, y );
+                nSlowDList.Add( x, z );
+                nHalfList.Add( x, 50 );
+            }
+
+            LineItem myCurve = myPane.AddCurve( "Slow K(" + aSlowKPeriod.ToString() + ")", nSlowKList, aSlowKColor );
+            LineItem myCurve2 = myPane.AddCurve( "Smoothed D(" + aSlowDPeriod.ToString() + ")", nSlowDList, aSlowDColor );
+            LineItem myCurve3 = myPane.AddCurve( "", nHalfList, Color.LightGray );
+
+            myCurve.Symbol.IsAntiAlias = true;
+            myCurve.Symbol.IsVisible = false;
+
+            myCurve2.Symbol.IsAntiAlias = true;
+            myCurve2.Symbol.IsVisible = false;
+
+            myCurve3.Symbol.IsAntiAlias = true;
+            myCurve3.Symbol.IsVisible = false;
+            myCurve3.Line.Style = System.Drawing.Drawing2D.DashStyle.Dash;
+            myCurve3.Line.DashOn = 10;
+            myCurve3.Line.DashOff = 5;
+
+            this.AdjustSmallerPane( myPane );
+
+            this.OriginalXAxisScale( myPane );
+        }
+
+        private void OriginalXAxisScale( GraphPane myPane )
         {
             myPane.XAxis.Scale.Max = this.SPList.Count + 0.5;
             myPane.XAxis.Scale.Min = myPane.XAxis.Scale.Max - 50;
@@ -247,12 +308,12 @@ namespace ValueInvesting.Views
                 nYAxisMax = Math.Max( nYAxisMax, this.MACDList[i].MacdHistogram );
             }
 
-            if ( nYAxisMax >= 0 && nYAxisMin >= 0)
+            if ( nYAxisMax >= 0 && nYAxisMin >= 0 )
             {
                 myPane.YAxis.Scale.Max = nYAxisMax * 1.05;
                 myPane.YAxis.Scale.Min = nYAxisMax * -1.05;
             }
-            else if ( nYAxisMax >= 0 &&  nYAxisMin < 0)
+            else if ( nYAxisMax >= 0 && nYAxisMin < 0 )
             {
                 nYAxisMax = Math.Max( nYAxisMax, nYAxisMin * -1 );
                 myPane.YAxis.Scale.Max = nYAxisMax * 1.05;
@@ -277,9 +338,13 @@ namespace ValueInvesting.Views
 
         private List<MacdPoint> MACDList
         {
-            get;set;
+            get; set;
         }
 
+        private List<Stoch> StochList
+        {
+            get; set;
+        }
 
         #region Colors
         private Color FallColor
@@ -318,9 +383,24 @@ namespace ValueInvesting.Views
 
         private void CandleStickGraph_ZoomEvent( ZedGraphControl sender, ZoomState oldState, ZoomState newState )
         {
-            this.AutoCandlestickAxisScale(this.mCandleStickPane);
+            this.AutoCandlestickAxisScale( this.mCandleStickPane );
             this.AutoMacdAxisScale( this.mMacdPane );
             this.ZedGraphControl.Invalidate();
         }
+
+
+        //PointPairList userClickrList = new PointPairList();
+        //int index = 0;
+        //double xVal;
+        //double yVal;
+        //object nearestobject = null;
+        //PointF clickedPoint = new PointF( e.X, e.Y );
+        //this.mCandleStickPane.FindNearestObject( clickedPoint, this.CreateGraphics(), out nearestobject, out index );
+        //this.mCandleStickPane.ReverseTransform( e.Location, out xVal, out yVal );
+        //userClickrList.Add( xVal, mCandleStickPane.YAxis.Scale.Max );
+        //userClickrList.Add( xVal, mCandleStickPane.YAxis.Scale.Min );
+        //this.mCandleStickPane.AddCurve( "", userClickrList, Color.LightYellow, SymbolType.None );
+        //this.ZedGraphControl.Refresh();
+
     }
 }
