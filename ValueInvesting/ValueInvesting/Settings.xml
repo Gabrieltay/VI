@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <!-- Consistent Earnings Per Share Gradient [0 - 1] Default [0.2]-->
+  <Profitability>0.2</Profitability>
+  <!-- Return on Equity Default [15]-->
+  <ROE>15</ROE>
+  <!-- Debt to Equity eg. 50% Default [0.5]-->
+  <DOE>0.5</DOE>
+  <!-- Dividend Yield to Entry Price eg. 5% Default [0.05]-->
+  <Dividend>0.05</Dividend>
+  <!-- Price to Book Value Default [0.8]-->
+  <BookValue>0.8</BookValue>
+</Config>
+
