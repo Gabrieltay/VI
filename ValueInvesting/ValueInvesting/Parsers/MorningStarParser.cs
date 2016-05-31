@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ValueInvesting.Commons;
+using ValueInvesting.Controllers;
 using ValueInvesting.Models;
 using ValueInvesting.Utils;
 
@@ -16,6 +17,7 @@ namespace ValueInvesting.Parsers
         public MorningStarParser( StockProfile aStock )
         {
             this.mStock = aStock;
+            this.mCfg = ConfigManager.getInstance().Config;
         }
 
         public override bool StartCSV( string aCsvString )
@@ -93,7 +95,7 @@ namespace ValueInvesting.Parsers
             }
             double nGradient, nIntercept;
             MathUtil.GenerateLinearBestFit( nEpsList, out nGradient, out nIntercept );
-            this.mStock.Profitability = ( nGradient > Params.PROFITABILITY_THRESHOLD ? true : false );
+            this.mStock.Profitability = ( nGradient > mCfg.Profitability ? true : false );
 
             this.mStock.EPS = String.IsNullOrEmpty( nCols[11] ) ? 0 :  Double.Parse( nCols[11] );
 
@@ -111,7 +113,7 @@ namespace ValueInvesting.Parsers
                 return;
             }
             this.mStock.BookValue = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
-            this.mStock.AEP = this.mStock.BookValue * Params.BOOKVALUE_THRESHOLD;
+            this.mStock.AEP = this.mStock.BookValue * mCfg.BookValue;
         }
 
         private void parseCashFlow( String aRow )
@@ -143,7 +145,7 @@ namespace ValueInvesting.Parsers
             }
 
             this.mStock.ROE = String.IsNullOrEmpty( nCols[11] ) ? 0 :  Double.Parse( nCols[11] );
-            this.mStock.Efficiency = this.mStock.ROE > Params.ROE_THRESHOLD ? true : false;
+            this.mStock.Efficiency = this.mStock.ROE > mCfg.ROE ? true : false;
         }
 
         private void parseDebtToEquity( String aRow )
@@ -155,7 +157,7 @@ namespace ValueInvesting.Parsers
             }
 
             this.mStock.DOE = String.IsNullOrEmpty(nCols[11])? 0 : Double.Parse( nCols[11] );
-            this.mStock.Conservative = this.mStock.DOE > Params.DOE_THRESHOLD ? false : true;
+            this.mStock.Conservative = this.mStock.DOE > mCfg.DOE ? false : true;
         }
 
         private void parseEpsGrowth( String aRow3, String aRow5, String aRow10 )
@@ -214,10 +216,15 @@ namespace ValueInvesting.Parsers
             this.mStock.Dividend = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
             this.mStock.DivYield = this.mStock.Dividend / this.mStock.Last;
 
-            this.mStock.DEP = this.mStock.Dividend / Params.DIVIDEND_THRESHOLD;
+            this.mStock.DEP = this.mStock.Dividend / mCfg.Dividend;
         }
 
         private StockProfile mStock
+        {
+            get; set;
+        }
+
+        private Config mCfg
         {
             get; set;
         }

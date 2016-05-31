@@ -8,22 +8,14 @@ namespace ValueInvesting.Commons
 {
     public class Config
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public double Profitability { get; set; }
 
-        public string ConnectionString { get; set; }
+        public double ROE { get; set; }
 
-        public Config()
-        {
-            Name = "Timothy";
-            ConnectionString = "localhost";
-        }
+        public double DOE { get; set; }
 
-        public override string ToString()
-        {
-            return String.Format(
-                @"Hi, my name is {0}. I am {1} years old and I am a web server at ""{2}"".",
-                Name, Age, ConnectionString );
-        }
+        public double Dividend { get; set; }
+
+        public double BookValue { get; set; }
     }
 }

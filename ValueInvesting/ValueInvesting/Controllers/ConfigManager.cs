@@ -14,15 +14,21 @@ namespace ValueInvesting.Controllers
 
         public void init( String aFilename )
         {
-            mCfg = new ConfigurationManager<Config>( aFilename );
+            mCfgMgr = new ConfigurationManager<Config>( aFilename );
+            this.Config = this.mCfgMgr.Out;
         }
 
-        public String read(String aKey)
+        public void Save()
         {
-            mCfg.Out.
+            this.mCfgMgr.SaveChanges();
         }
 
-        private ConfigurationManager<Config> mCfg
+        private ConfigurationManager<Config> mCfgMgr
+        {
+            get; set;
+        }
+
+        public Config Config
         {
             get; set;
         }
