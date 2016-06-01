@@ -16,6 +16,7 @@ using ValueInvesting.Views;
 using ValueInvesting.Utils;
 using System.IO;
 using System.Collections;
+using BrightIdeasSoftware;
 
 namespace ValueInvesting.Views
 {
@@ -24,10 +25,30 @@ namespace ValueInvesting.Views
         public ValueInvestingForm()
         {
             InitializeComponent();
+            InitializeSearchEngine();
             WatchlistController.getInstance().Init();
             WatchlistObserver nObserver = new WatchlistObserver( this.watchlistOLV );
             WatchlistController.getInstance().Subscribe( nObserver );
             this.ActiveControl = this.tickTxtbox;
+        }
+
+        private void InitializeSearchEngine()
+        {
+            DescribedTaskRenderer nRenderer = new BrightIdeasSoftware.DescribedTaskRenderer();
+            nRenderer.ImageList = this.CountryImageList;
+            nRenderer.DescriptionAspectName = "Name";
+            nRenderer.TitleFont = new Font( "Tahoma", 11, FontStyle.Bold );
+            nRenderer.DescriptionFont = new Font( "Tahoma", 9 );
+            nRenderer.ImageTextSpace = 8;
+            nRenderer.TitleDescriptionSpace = 1;
+            nRenderer.UseGdiTextRendering = true;
+            this.olvStockColumn.Renderer = nRenderer;
+            this.olvStockColumn.AspectName = "SymStr";
+            this.olvStockColumn.ImageAspectName = "MktStr";
+            this.olvStockColumn.CellPadding = new Rectangle( 4, 2, 4, 2 );
+
+            this.SearchOLV.AddObjects( SearchEngine.getInstance().Stocks );
+            this.SearchOLV.Hide();
         }
 
         private void StockQuery( StockProfile aStock, Boolean Editable = false, Boolean Save = false )
@@ -77,7 +98,7 @@ namespace ValueInvesting.Views
             }
         }
 
-        private void StockDownload(ref StockData aStockData)
+        private void StockDownload( ref StockData aStockData )
         {
             String nYahooDownloadStr = "";
 
@@ -90,7 +111,7 @@ namespace ValueInvesting.Views
 
             if ( !File.Exists( @"data/" + nDatafile ) )
             {
-                nYahooDownloadStr = YahooFinanceDownloader.QUERY_FULL_STR; 
+                nYahooDownloadStr = YahooFinanceDownloader.QUERY_FULL_STR;
             }
             else
             {
@@ -105,13 +126,13 @@ namespace ValueInvesting.Views
 
                 DateTime nStartDate = aStockData.LastDate;//.AddDays( 1 );
                 nYahooDownloadStr = nYahooDownloadStr.Replace( "@SD", nStartDate.Day.ToString() );
-                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SM", (nStartDate.Month-1).ToString() );
+                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SM", ( nStartDate.Month - 1 ).ToString() );
                 nYahooDownloadStr = nYahooDownloadStr.Replace( "@SY", nStartDate.Year.ToString() );
             }
 
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", (DateTime.Now.Day).ToString() );
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", ( DateTime.Now.Day ).ToString() );
             //nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", "2" );
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EM", (DateTime.Now.Month-1).ToString() );
+            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EM", ( DateTime.Now.Month - 1 ).ToString() );
             nYahooDownloadStr = nYahooDownloadStr.Replace( "@EY", DateTime.Now.Year.ToString() );
 
             String nYahooSymbol = aStockData.Sym;
@@ -191,6 +212,21 @@ namespace ValueInvesting.Views
             }
         }
 
+        private void RebuildFilters()
+        {
+
+            // Build a composite filter that unify the three possible filtering criteria
+
+            List<IModelFilter> filters = new List<IModelFilter>();
+
+            if ( !String.IsNullOrEmpty( this.tickTxtbox.Text ) )
+                filters.Add( new TextMatchFilter( this.SearchOLV, this.tickTxtbox.Text ) );
+
+            // Use AdditionalFilter (instead of ModelFilter) since AdditionalFilter plays well with any
+            // extra filtering the user might specify via the column header
+            this.SearchOLV.AdditionalFilter = filters.Count == 0 ? null : new CompositeAllFilter( filters );
+        }
+
         #region Properties
         private String Filename
         {
@@ -239,7 +275,7 @@ namespace ValueInvesting.Views
         {
             if ( watchlistOLV.SelectedItems.Count == 1 )
             {
-                StockProfile nStock = (StockProfile) watchlistOLV.SelectedObject;
+                StockProfile nStock = (StockProfile)watchlistOLV.SelectedObject;
                 if ( nStock.LastUpdate.Date == DateTime.Now.Date )
                 {
                     StockProfilingForm nForm = new StockProfilingForm( nStock );
@@ -277,7 +313,7 @@ namespace ValueInvesting.Views
         {
             if ( watchlistOLV.SelectedItems.Count > 0 )
             {
-                WatchlistController.getInstance().Delete( (ArrayList) watchlistOLV.SelectedObjects );
+                WatchlistController.getInstance().Delete( (ArrayList)watchlistOLV.SelectedObjects );
             }
         }
 
@@ -310,8 +346,8 @@ namespace ValueInvesting.Views
 
         private void updateWorker_DoWork( object sender, DoWorkEventArgs e )
         {
-            List<StockProfile> nStocks = (List<StockProfile>) e.Argument;
-            this.UpdateTitle( String.Format( "Value Investing - Update {0}/{1}", 0, nStocks.Count ));
+            List<StockProfile> nStocks = (List<StockProfile>)e.Argument;
+            this.UpdateTitle( String.Format( "Value Investing - Update {0}/{1}", 0, nStocks.Count ) );
 
             int i = 0;
             foreach ( StockProfile nStock in nStocks )
@@ -325,14 +361,85 @@ namespace ValueInvesting.Views
         private void updateWorker_ProgressChanged( object sender, ProgressChangedEventArgs e )
         {
             this.watchlistOLV.RefreshObject( e.UserState );
-            this.UpdateTitle(String.Format( "Value Investing - Update {0}/{1}", e.ProgressPercentage, this.watchlistOLV.GetItemCount() ));
+            this.UpdateTitle( String.Format( "Value Investing - Update {0}/{1}", e.ProgressPercentage, this.watchlistOLV.GetItemCount() ) );
         }
 
         private void updateWorker_RunWorkerCompleted( object sender, RunWorkerCompletedEventArgs e )
         {
             //this.watchlistOLV.Invalidate();
-            this.UpdateTitle( String.Format( "Value Investing"));
+            this.UpdateTitle( String.Format( "Value Investing" ) );
             MessageBox.Show( "Update Completed!", "Value Investing Info", MessageBoxButtons.OK, MessageBoxIcon.Information );
+        }
+
+        private void watchlistOLV_MouseClick( object sender, MouseEventArgs e )
+        {
+            this.SearchOLV.Hide();
+        }
+
+        private void ValueInvestingForm_MouseDown( object sender, MouseEventArgs e )
+        {
+            this.SearchOLV.Hide();
+        }
+
+        private void tickTxtbox_TextChanged( object sender, EventArgs e )
+        {
+            if ( this.tickTxtbox.Text.Length >= 3 )
+            {
+                this.SearchOLV.Show();
+                RebuildFilters();
+                //List<Stock> nSearchResults = SearchEngine.getInstance().Search( this.tickTxtbox.Text );
+            }
+            else
+            {
+                this.SearchOLV.Hide();
+            }
+        }
+
+        private void SearchOLV_Click( object sender, EventArgs e )
+        {
+            if ( this.SearchOLV.SelectedItems.Count == 1 )
+            {
+                Stock nStockObj = (Stock)this.SearchOLV.SelectedObject;
+                this.SearchOLV.Hide();
+                if ( WatchlistController.getInstance().isExist( nStockObj.Sym ) )
+                {
+                    this.StockQuery( WatchlistController.getInstance().GetStock( nStockObj.Sym ), true );
+                }
+                else
+                {
+                    StockProfile nStock = new StockProfile( nStockObj.Sym );
+                    nStock.Market = nStockObj.Market;
+                    this.StockQuery( nStock, true );
+                }
+            }
+        }
+
+        private void tickTxtbox_KeyDown( object sender, KeyEventArgs e )
+        {
+            if ( this.SearchOLV.Visible )
+            {
+                if ( e.KeyCode == Keys.Down )
+                    this.ActiveControl = this.SearchOLV;
+            }
+        }
+
+        private void SearchOLV_KeyPress( object sender, KeyPressEventArgs e )
+        {
+            if ( e.KeyChar == Convert.ToChar( Keys.Return ) && this.SearchOLV.SelectedItems.Count == 1 )
+            {
+                Stock nStockObj = (Stock)this.SearchOLV.SelectedObject;
+                this.SearchOLV.Hide();
+                if ( WatchlistController.getInstance().isExist( nStockObj.Sym ) )
+                {
+                    this.StockQuery( WatchlistController.getInstance().GetStock( nStockObj.Sym ), true );
+                }
+                else
+                {
+                    StockProfile nStock = new StockProfile( nStockObj.Sym );
+                    nStock.Market = nStockObj.Market;
+                    this.StockQuery( nStock, true );
+                }
+            }
         }
     }
 }

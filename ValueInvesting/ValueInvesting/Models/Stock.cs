@@ -25,6 +25,22 @@ namespace ValueInvesting.Models
             get; set;
         }
 
+        public String MktStr
+        {
+            get
+            {
+               return this.Market.ToString();
+            }
+        }
+
+        public String SymStr
+        {
+            get
+            {
+                return String.Format( "{0} - {1}", this.Sym, this.Mkt );
+            }
+        }
+
         public String Sym
         {
             get; set;

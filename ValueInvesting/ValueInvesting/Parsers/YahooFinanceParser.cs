@@ -26,7 +26,7 @@ namespace ValueInvesting.Parsers
             x - exchange
         */
 
-        public const String QUERY_STR = "http://finance.yahoo.com/d/quotes.csv?s=@TICK&f=npsx";
+        public const String QUERY_STR = "http://finance.yahoo.com/d/quotes.csv?s=@TICK&f=npsxr5";
 
         public const String PROFILE_STR = "https://finance.yahoo.com/q/pr?s=@TICK+profile";
 
@@ -65,8 +65,8 @@ namespace ValueInvesting.Parsers
                 this.mStock.Mkt = Translator.MarketCodeToString( nDataArray[3].Replace( "\"", "" ).Replace( "\n", "" ) );
                 this.mStock.Market = Translator.MarketStringToEnum( this.mStock.Mkt );
             }
-            //if ( nDataArray[4] != "N/A" )
-            //    this.mStock.BookValue = Double.Parse( nDataArray[4] );
+            if ( nDataArray[4] != "N/A" )
+                this.mStock.PEG = Double.Parse( nDataArray[4] );
             //if ( nDataArray[5] != "N/A" )
             //    this.mStock.EPS = Double.Parse( nDataArray[5] );
             //if ( nDataArray[6] != "N/A" )
@@ -85,6 +85,11 @@ namespace ValueInvesting.Parsers
 
             this.mStock.Summary = nNode.InnerText;
             return true;
+        }
+
+        public override bool StartTXT( string aTxtString )
+        {
+            throw new NotImplementedException();
         }
 
         private StockProfile mStock

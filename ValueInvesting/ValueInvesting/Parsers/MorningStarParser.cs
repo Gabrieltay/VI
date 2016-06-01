@@ -201,9 +201,16 @@ namespace ValueInvesting.Parsers
             if ( nSum10/5 != 0.0 && nSum10/5 < nMinGrowth )
                 nMinGrowth = nSum10/5;
 
-            this.mStock.PEG = this.mStock.PERatio / nMinGrowth;
-
-            this.mStock.GEP = this.mStock.EPS * nMinGrowth;
+            if ( nMinGrowth != 0 )
+            {
+                this.mStock.PEG = this.mStock.PERatio / nMinGrowth;
+                this.mStock.GEP = this.mStock.EPS * nMinGrowth;
+            }
+            else
+            {
+                this.mStock.GEP = this.mStock.PERatio / this.mStock.PEG * this.mStock.EPS;
+            }
+            
         }
 
         private void parseDividend(String aRow)
@@ -217,6 +224,11 @@ namespace ValueInvesting.Parsers
             this.mStock.DivYield = this.mStock.Dividend / this.mStock.Last;
 
             this.mStock.DEP = this.mStock.Dividend / mCfg.Dividend;
+        }
+
+        public override bool StartTXT( string aTxtString )
+        {
+            throw new NotImplementedException();
         }
 
         private StockProfile mStock

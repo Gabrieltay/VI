@@ -44,6 +44,8 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.updateWorker = new System.ComponentModel.BackgroundWorker();
+            this.SearchOLV = new BrightIdeasSoftware.ObjectListView();
+            this.olvStockColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.watchlistOLV = new BrightIdeasSoftware.ObjectListView();
             this.symColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -51,11 +53,13 @@
             this.growthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.growthPriceRenderer = new ValueInvesting.Renderers.GrowthPriceRenderer();
             this.divColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dividendPriceRenderer = new ValueInvesting.Renderers.DividendPriceRenderer();
             this.assetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.assetPriceRenderer = new ValueInvesting.Renderers.AssetPriceRenderer();
             this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.dividendPriceRenderer = new ValueInvesting.Renderers.DividendPriceRenderer();
-            this.assetPriceRenderer = new ValueInvesting.Renderers.AssetPriceRenderer();
+            this.CountryImageList = new System.Windows.Forms.ImageList(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.SearchOLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.watchlistOLV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,8 +68,10 @@
             this.tickTxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tickTxtbox.Location = new System.Drawing.Point(790, 30);
             this.tickTxtbox.Name = "tickTxtbox";
-            this.tickTxtbox.Size = new System.Drawing.Size(127, 23);
+            this.tickTxtbox.Size = new System.Drawing.Size(243, 19);
             this.tickTxtbox.TabIndex = 0;
+            this.tickTxtbox.TextChanged += new System.EventHandler(this.tickTxtbox_TextChanged);
+            this.tickTxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tickTxtbox_KeyDown);
             this.tickTxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tickTxtbox_KeyPress);
             // 
             // usRadioButton
@@ -75,7 +81,7 @@
             this.usRadioButton.ForeColor = System.Drawing.Color.White;
             this.usRadioButton.Location = new System.Drawing.Point(790, 59);
             this.usRadioButton.Name = "usRadioButton";
-            this.usRadioButton.Size = new System.Drawing.Size(127, 23);
+            this.usRadioButton.Size = new System.Drawing.Size(105, 17);
             this.usRadioButton.TabIndex = 0;
             this.usRadioButton.TabStop = true;
             this.usRadioButton.Text = "NYSE, NASDAQ";
@@ -87,7 +93,7 @@
             this.sgRadioButton.ForeColor = System.Drawing.Color.White;
             this.sgRadioButton.Location = new System.Drawing.Point(790, 88);
             this.sgRadioButton.Name = "sgRadioButton";
-            this.sgRadioButton.Size = new System.Drawing.Size(58, 23);
+            this.sgRadioButton.Size = new System.Drawing.Size(47, 17);
             this.sgRadioButton.TabIndex = 1;
             this.sgRadioButton.Text = "SGX";
             this.sgRadioButton.UseVisualStyleBackColor = true;
@@ -203,6 +209,41 @@
             this.updateWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.updateWorker_ProgressChanged);
             this.updateWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.updateWorker_RunWorkerCompleted);
             // 
+            // SearchOLV
+            // 
+            this.SearchOLV.AllColumns.Add(this.olvStockColumn);
+            this.SearchOLV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchOLV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchOLV.CellEditUseWholeCell = false;
+            this.SearchOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvStockColumn});
+            this.SearchOLV.Cursor = System.Windows.Forms.Cursors.Default;
+            this.SearchOLV.FullRowSelect = true;
+            this.SearchOLV.GridLines = true;
+            this.SearchOLV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.SearchOLV.Location = new System.Drawing.Point(790, 55);
+            this.SearchOLV.MultiSelect = false;
+            this.SearchOLV.Name = "SearchOLV";
+            this.SearchOLV.RowHeight = 54;
+            this.SearchOLV.ShowGroups = false;
+            this.SearchOLV.Size = new System.Drawing.Size(243, 369);
+            this.SearchOLV.SmallImageList = this.CountryImageList;
+            this.SearchOLV.TabIndex = 12;
+            this.SearchOLV.UseCompatibleStateImageBehavior = false;
+            this.SearchOLV.UseFiltering = true;
+            this.SearchOLV.View = System.Windows.Forms.View.Details;
+            this.SearchOLV.Click += new System.EventHandler(this.SearchOLV_Click);
+            this.SearchOLV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchOLV_KeyPress);
+            // 
+            // olvStockColumn
+            // 
+            this.olvStockColumn.AspectName = "Sym";
+            this.olvStockColumn.IsEditable = false;
+            this.olvStockColumn.MinimumWidth = 40;
+            this.olvStockColumn.Text = "Symbol";
+            this.olvStockColumn.Width = 240;
+            // 
             // watchlistOLV
             // 
             this.watchlistOLV.AllColumns.Add(this.symColumn);
@@ -233,11 +274,12 @@
             this.watchlistOLV.ItemRenderer = this.growthPriceRenderer;
             this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
             this.watchlistOLV.Name = "watchlistOLV";
-            this.watchlistOLV.Size = new System.Drawing.Size(904, 395);
+            this.watchlistOLV.Size = new System.Drawing.Size(1020, 395);
             this.watchlistOLV.TabIndex = 5;
             this.watchlistOLV.UseCompatibleStateImageBehavior = false;
             this.watchlistOLV.View = System.Windows.Forms.View.Details;
             this.watchlistOLV.DoubleClick += new System.EventHandler(this.watchlistOLV_DoubleClick);
+            this.watchlistOLV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.watchlistOLV_MouseClick);
             // 
             // symColumn
             // 
@@ -297,12 +339,20 @@
             this.dateColumn.Text = "Last Updated";
             this.dateColumn.Width = 122;
             // 
+            // CountryImageList
+            // 
+            this.CountryImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("CountryImageList.ImageStream")));
+            this.CountryImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.CountryImageList.Images.SetKeyName(0, "SG");
+            this.CountryImageList.Images.SetKeyName(1, "US");
+            // 
             // ValueInvestingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(929, 525);
+            this.ClientSize = new System.Drawing.Size(1045, 525);
+            this.Controls.Add(this.SearchOLV);
             this.Controls.Add(this.infoButton);
             this.Controls.Add(this.chartButton);
             this.Controls.Add(this.trashButton);
@@ -314,7 +364,7 @@
             this.Controls.Add(this.sgRadioButton);
             this.Controls.Add(this.usRadioButton);
             this.Controls.Add(this.tickTxtbox);
-            this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -323,6 +373,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Value Investing";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ValueInvestingForm_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.SearchOLV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.watchlistOLV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -357,5 +409,8 @@
         private Renderers.GrowthPriceRenderer growthPriceRenderer;
         private Renderers.DividendPriceRenderer dividendPriceRenderer;
         private Renderers.AssetPriceRenderer assetPriceRenderer;
+        private BrightIdeasSoftware.ObjectListView SearchOLV;
+        private BrightIdeasSoftware.OLVColumn olvStockColumn;
+        private System.Windows.Forms.ImageList CountryImageList;
     }
 }

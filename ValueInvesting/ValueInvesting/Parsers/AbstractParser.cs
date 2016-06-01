@@ -11,5 +11,7 @@ namespace ValueInvesting.Parsers
         public abstract Boolean StartCSV( String aCsvString );
 
         public abstract Boolean StartHTML( String aHtmlString );
+
+        public abstract Boolean StartTXT( String aTxtString );
     }
 }

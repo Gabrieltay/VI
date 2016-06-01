@@ -20,6 +20,7 @@ namespace ValueInvesting
         static void Main()
         {
             ConfigManager.getInstance().init( "Settings.xml" );
+            SearchEngine.getInstance().init();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run( new ValueInvestingForm() );

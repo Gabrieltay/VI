@@ -58,6 +58,11 @@ namespace ValueInvesting.Parsers
             throw new NotImplementedException();
         }
 
+        public override bool StartTXT( string aTxtString )
+        {
+            throw new NotImplementedException();
+        }
+
         private StockData mStockData
         {
             get; set;

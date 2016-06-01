@@ -126,6 +126,7 @@
     <Compile Include="Commons\Enums.cs" />
     <Compile Include="Controllers\ConfigManager.cs" />
     <Compile Include="Controllers\RESTController.cs" />
+    <Compile Include="Controllers\SearchEngine.cs" />
     <Compile Include="Controllers\WatchlistController.cs" />
     <Compile Include="Models\CandleStick.cs" />
     <Compile Include="Models\MacdPoint.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Models\StockData.cs" />
     <Compile Include="Observers\WatchlistObserver.cs" />
     <Compile Include="Parsers\AbstractParser.cs" />
+    <Compile Include="Parsers\EodDataSymbolsParser.cs" />
     <Compile Include="Parsers\MorningStarParser.cs" />
     <Compile Include="Parsers\YahooFinanceDownloader.cs" />
     <Compile Include="Parsers\YahooFinanceParser.cs" />
@@ -261,6 +263,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Stock.ico" />
+    <Content Include="Stocks\NASDAQ.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stocks\NYSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stocks\SGX.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
