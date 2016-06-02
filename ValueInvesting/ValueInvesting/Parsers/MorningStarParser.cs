@@ -17,6 +17,7 @@ namespace ValueInvesting.Parsers
         public MorningStarParser( StockProfile aStock )
         {
             this.mStock = aStock;
+            this.mCurrencyRate = 1;
             this.mCfg = ConfigManager.getInstance().Config;
         }
 
@@ -87,6 +88,23 @@ namespace ValueInvesting.Parsers
             {
                 return;
             }
+
+            String nCurrency = nCols[0].Replace( "Earnings Per Share", "" ).Trim();
+            if ( !nCurrency.Equals( "USD" ) && this.mStock.Market == Enums.Market.US )
+            {
+                String nYahooCsvStr = RESTController.GetREST( YahooFinanceCurrencyParser.QUERY_STR.Replace( "@FRCUR", nCurrency ).Replace( "@TOCUR", "USD" ) );
+                YahooFinanceCurrencyParser nParser = new YahooFinanceCurrencyParser();
+                nParser.StartCSV( nYahooCsvStr );
+                this.mCurrencyRate = nParser.Rate;
+            }
+            else if ( !nCurrency.Equals( "SGD" ) && this.mStock.Market == Enums.Market.SG )
+            {
+                String nYahooCsvStr = RESTController.GetREST( YahooFinanceCurrencyParser.QUERY_STR.Replace( "@FRCUR", nCurrency ).Replace( "@TOCUR", "SGD" ) );
+                YahooFinanceCurrencyParser nParser = new YahooFinanceCurrencyParser();
+                nParser.StartCSV( nYahooCsvStr );
+                this.mCurrencyRate = nParser.Rate;
+            }
+
             List<Point> nEpsList = new List<Point>();
 
             for ( int i = 6; i < 11; i++ )
@@ -97,7 +115,7 @@ namespace ValueInvesting.Parsers
             MathUtil.GenerateLinearBestFit( nEpsList, out nGradient, out nIntercept );
             this.mStock.Profitability = ( nGradient > mCfg.Profitability ? true : false );
 
-            this.mStock.EPS = String.IsNullOrEmpty( nCols[11] ) ? 0 :  Double.Parse( nCols[11] );
+            this.mStock.EPS = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] ) * this.mCurrencyRate;
 
             if ( this.mStock.EPS != 0 )
             {
@@ -112,7 +130,7 @@ namespace ValueInvesting.Parsers
             {
                 return;
             }
-            this.mStock.BookValue = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
+            this.mStock.BookValue = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] ) * this.mCurrencyRate;
             this.mStock.AEP = this.mStock.BookValue * mCfg.BookValue;
         }
 
@@ -144,7 +162,7 @@ namespace ValueInvesting.Parsers
                 return;
             }
 
-            this.mStock.ROE = String.IsNullOrEmpty( nCols[11] ) ? 0 :  Double.Parse( nCols[11] );
+            this.mStock.ROE = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
             this.mStock.Efficiency = this.mStock.ROE > mCfg.ROE ? true : false;
         }
 
@@ -156,7 +174,7 @@ namespace ValueInvesting.Parsers
                 return;
             }
 
-            this.mStock.DOE = String.IsNullOrEmpty(nCols[11])? 0 : Double.Parse( nCols[11] );
+            this.mStock.DOE = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
             this.mStock.Conservative = this.mStock.DOE > mCfg.DOE ? false : true;
         }
 
@@ -194,12 +212,12 @@ namespace ValueInvesting.Parsers
                     nSum10 += String.IsNullOrEmpty( nCols10[i] ) ? 0.0 : double.Parse( nCols10[i] );
                 }
 
-            if ( nSum3/5 != 0.0 )
-                nMinGrowth = nSum3/5;
-            if ( nSum5/5 != 0.0 && nSum5/5 < nMinGrowth )
-                nMinGrowth = nSum5/5;
-            if ( nSum10/5 != 0.0 && nSum10/5 < nMinGrowth )
-                nMinGrowth = nSum10/5;
+            if ( nSum3 / 5 != 0.0 )
+                nMinGrowth = nSum3 / 5;
+            if ( nSum5 / 5 != 0.0 && nSum5 / 5 < nMinGrowth )
+                nMinGrowth = nSum5 / 5;
+            if ( nSum10 / 5 != 0.0 && nSum10 / 5 < nMinGrowth )
+                nMinGrowth = nSum10 / 5;
 
             if ( nMinGrowth != 0 )
             {
@@ -210,17 +228,17 @@ namespace ValueInvesting.Parsers
             {
                 this.mStock.GEP = this.mStock.PERatio / this.mStock.PEG * this.mStock.EPS;
             }
-            
+
         }
 
-        private void parseDividend(String aRow)
+        private void parseDividend( String aRow )
         {
             string[] nCols = aRow.Split( ',' );
             if ( nCols.Length != 12 )
             {
                 return;
             }
-            this.mStock.Dividend = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] );
+            this.mStock.Dividend = String.IsNullOrEmpty( nCols[11] ) ? 0 : Double.Parse( nCols[11] ) * this.mCurrencyRate;
             this.mStock.DivYield = this.mStock.Dividend / this.mStock.Last;
 
             this.mStock.DEP = this.mStock.Dividend / mCfg.Dividend;
@@ -237,6 +255,11 @@ namespace ValueInvesting.Parsers
         }
 
         private Config mCfg
+        {
+            get; set;
+        }
+
+        private double mCurrencyRate
         {
             get; set;
         }

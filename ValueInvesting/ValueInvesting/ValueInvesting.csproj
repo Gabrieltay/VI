@@ -140,6 +140,7 @@
     <Compile Include="Parsers\AbstractParser.cs" />
     <Compile Include="Parsers\EodDataSymbolsParser.cs" />
     <Compile Include="Parsers\MorningStarParser.cs" />
+    <Compile Include="Parsers\YahooFinanceCurrencyParser.cs" />
     <Compile Include="Parsers\YahooFinanceDownloader.cs" />
     <Compile Include="Parsers\YahooFinanceParser.cs" />
     <Compile Include="Program.cs" />
