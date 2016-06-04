@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ValueInvestingForm));
             this.tickTxtbox = new System.Windows.Forms.TextBox();
-            this.usRadioButton = new System.Windows.Forms.RadioButton();
-            this.sgRadioButton = new System.Windows.Forms.RadioButton();
             this.updateButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
@@ -68,37 +66,13 @@
             // tickTxtbox
             // 
             this.tickTxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tickTxtbox.Location = new System.Drawing.Point(790, 30);
+            this.tickTxtbox.Location = new System.Drawing.Point(790, 37);
             this.tickTxtbox.Name = "tickTxtbox";
             this.tickTxtbox.Size = new System.Drawing.Size(243, 19);
             this.tickTxtbox.TabIndex = 0;
             this.tickTxtbox.TextChanged += new System.EventHandler(this.tickTxtbox_TextChanged);
             this.tickTxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tickTxtbox_KeyDown);
             this.tickTxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tickTxtbox_KeyPress);
-            // 
-            // usRadioButton
-            // 
-            this.usRadioButton.AutoSize = true;
-            this.usRadioButton.Checked = true;
-            this.usRadioButton.ForeColor = System.Drawing.Color.White;
-            this.usRadioButton.Location = new System.Drawing.Point(790, 59);
-            this.usRadioButton.Name = "usRadioButton";
-            this.usRadioButton.Size = new System.Drawing.Size(105, 17);
-            this.usRadioButton.TabIndex = 0;
-            this.usRadioButton.TabStop = true;
-            this.usRadioButton.Text = "NYSE, NASDAQ";
-            this.usRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // sgRadioButton
-            // 
-            this.sgRadioButton.AutoSize = true;
-            this.sgRadioButton.ForeColor = System.Drawing.Color.White;
-            this.sgRadioButton.Location = new System.Drawing.Point(790, 88);
-            this.sgRadioButton.Name = "sgRadioButton";
-            this.sgRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.sgRadioButton.TabIndex = 1;
-            this.sgRadioButton.Text = "SGX";
-            this.sgRadioButton.UseVisualStyleBackColor = true;
             // 
             // updateButton
             // 
@@ -224,7 +198,7 @@
             this.SearchOLV.FullRowSelect = true;
             this.SearchOLV.GridLines = true;
             this.SearchOLV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.SearchOLV.Location = new System.Drawing.Point(790, 55);
+            this.SearchOLV.Location = new System.Drawing.Point(790, 62);
             this.SearchOLV.MultiSelect = false;
             this.SearchOLV.Name = "SearchOLV";
             this.SearchOLV.RowHeight = 54;
@@ -397,8 +371,6 @@
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.watchlistOLV);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.sgRadioButton);
-            this.Controls.Add(this.usRadioButton);
             this.Controls.Add(this.tickTxtbox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -420,8 +392,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox tickTxtbox;
-        private System.Windows.Forms.RadioButton usRadioButton;
-        private System.Windows.Forms.RadioButton sgRadioButton;
         private System.Windows.Forms.Button newButton;
         private BrightIdeasSoftware.ObjectListView watchlistOLV;
         private BrightIdeasSoftware.OLVColumn symColumn;

@@ -256,24 +256,24 @@ namespace ValueInvesting.Views
 
         private void tickTxtbox_KeyPress( object sender, KeyPressEventArgs e )
         {
-            if ( e.KeyChar == Convert.ToChar( Keys.Return ) )
-            {
-                Enums.Market nMkt = Enums.Market.US;
+            //if ( e.KeyChar == Convert.ToChar( Keys.Return ) )
+            //{
+            //    Enums.Market nMkt = Enums.Market.US;
 
-                if ( this.sgRadioButton.Checked )
-                    nMkt = Enums.Market.SG;
+            //    if ( this.sgRadioButton.Checked )
+            //        nMkt = Enums.Market.SG;
 
-                if ( WatchlistController.getInstance().isExist( this.tickTxtbox.Text ) )
-                {
-                    this.StockQuery( WatchlistController.getInstance().GetStock( this.tickTxtbox.Text ), true );
-                }
-                else
-                {
-                    StockProfile nStock = new StockProfile( this.tickTxtbox.Text );
-                    nStock.Market = nMkt;
-                    this.StockQuery( nStock, true );
-                }
-            }
+            //    if ( WatchlistController.getInstance().isExist( this.tickTxtbox.Text ) )
+            //    {
+            //        this.StockQuery( WatchlistController.getInstance().GetStock( this.tickTxtbox.Text ), true );
+            //    }
+            //    else
+            //    {
+            //        StockProfile nStock = new StockProfile( this.tickTxtbox.Text );
+            //        nStock.Market = nMkt;
+            //        this.StockQuery( nStock, true );
+            //    }
+            //}
         }
 
         private void watchlistOLV_DoubleClick( object sender, EventArgs e )
