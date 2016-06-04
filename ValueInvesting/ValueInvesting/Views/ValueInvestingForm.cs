@@ -47,6 +47,7 @@ namespace ValueInvesting.Views
             this.olvStockColumn.ImageAspectName = "MktStr";
             this.olvStockColumn.CellPadding = new Rectangle( 4, 2, 4, 2 );
 
+            this.SearchOLV.Height = 300;
             this.SearchOLV.AddObjects( SearchEngine.getInstance().Stocks );
             this.SearchOLV.Hide();
         }
@@ -86,6 +87,10 @@ namespace ValueInvesting.Views
 
             aStock.LastUpdate = DateTime.Now;
 
+            //Temp Testing
+            Random nRdm = new Random();
+            aStock.ShortStrength = nRdm.Next( 1, 10 );
+            aStock.LongStrength = nRdm.Next( 1, 10 );
             if ( Editable )
             {
                 StockProfilingForm nForm = new StockProfilingForm( aStock );
@@ -419,7 +424,10 @@ namespace ValueInvesting.Views
             if ( this.SearchOLV.Visible )
             {
                 if ( e.KeyCode == Keys.Down )
+                {
                     this.ActiveControl = this.SearchOLV;
+                    this.SearchOLV.SelectedIndex = 0;
+                }
             }
         }
 

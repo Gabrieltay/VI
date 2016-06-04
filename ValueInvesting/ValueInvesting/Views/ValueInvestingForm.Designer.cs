@@ -46,6 +46,8 @@
             this.updateWorker = new System.ComponentModel.BackgroundWorker();
             this.SearchOLV = new BrightIdeasSoftware.ObjectListView();
             this.olvStockColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.CountryImageList = new System.Windows.Forms.ImageList(this.components);
+            this.StockImageList = new System.Windows.Forms.ImageList(this.components);
             this.watchlistOLV = new BrightIdeasSoftware.ObjectListView();
             this.symColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -57,8 +59,8 @@
             this.assetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.assetPriceRenderer = new ValueInvesting.Renderers.AssetPriceRenderer();
             this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.strengthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.CountryImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.SearchOLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.watchlistOLV)).BeginInit();
             this.SuspendLayout();
@@ -227,7 +229,7 @@
             this.SearchOLV.Name = "SearchOLV";
             this.SearchOLV.RowHeight = 54;
             this.SearchOLV.ShowGroups = false;
-            this.SearchOLV.Size = new System.Drawing.Size(243, 369);
+            this.SearchOLV.Size = new System.Drawing.Size(243, 21);
             this.SearchOLV.SmallImageList = this.CountryImageList;
             this.SearchOLV.TabIndex = 12;
             this.SearchOLV.UseCompatibleStateImageBehavior = false;
@@ -244,6 +246,29 @@
             this.olvStockColumn.Text = "Symbol";
             this.olvStockColumn.Width = 240;
             // 
+            // CountryImageList
+            // 
+            this.CountryImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("CountryImageList.ImageStream")));
+            this.CountryImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.CountryImageList.Images.SetKeyName(0, "SG");
+            this.CountryImageList.Images.SetKeyName(1, "US");
+            // 
+            // StockImageList
+            // 
+            this.StockImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("StockImageList.ImageStream")));
+            this.StockImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.StockImageList.Images.SetKeyName(0, "Strength-0");
+            this.StockImageList.Images.SetKeyName(1, "Strength-1");
+            this.StockImageList.Images.SetKeyName(2, "Strength-2");
+            this.StockImageList.Images.SetKeyName(3, "Strength-3");
+            this.StockImageList.Images.SetKeyName(4, "Strength-4");
+            this.StockImageList.Images.SetKeyName(5, "Strength-5");
+            this.StockImageList.Images.SetKeyName(6, "Strength-6");
+            this.StockImageList.Images.SetKeyName(7, "Strength-7");
+            this.StockImageList.Images.SetKeyName(8, "Strength-8");
+            this.StockImageList.Images.SetKeyName(9, "Strength-9");
+            this.StockImageList.Images.SetKeyName(10, "Strength-10");
+            // 
             // watchlistOLV
             // 
             this.watchlistOLV.AllColumns.Add(this.symColumn);
@@ -253,6 +278,7 @@
             this.watchlistOLV.AllColumns.Add(this.divColumn);
             this.watchlistOLV.AllColumns.Add(this.assetColumn);
             this.watchlistOLV.AllColumns.Add(this.bizColumn);
+            this.watchlistOLV.AllColumns.Add(this.strengthColumn);
             this.watchlistOLV.AllColumns.Add(this.dateColumn);
             this.watchlistOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -267,6 +293,7 @@
             this.divColumn,
             this.assetColumn,
             this.bizColumn,
+            this.strengthColumn,
             this.dateColumn});
             this.watchlistOLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.watchlistOLV.FullRowSelect = true;
@@ -275,6 +302,7 @@
             this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
             this.watchlistOLV.Name = "watchlistOLV";
             this.watchlistOLV.Size = new System.Drawing.Size(1020, 395);
+            this.watchlistOLV.SmallImageList = this.StockImageList;
             this.watchlistOLV.TabIndex = 5;
             this.watchlistOLV.UseCompatibleStateImageBehavior = false;
             this.watchlistOLV.View = System.Windows.Forms.View.Details;
@@ -299,6 +327,7 @@
             // 
             this.lastColumn.AspectName = "Last";
             this.lastColumn.AspectToStringFormat = "{0:C}";
+            this.lastColumn.Groupable = false;
             this.lastColumn.Text = "Price";
             this.lastColumn.Width = 90;
             // 
@@ -306,6 +335,7 @@
             // 
             this.growthColumn.AspectName = "GEP";
             this.growthColumn.AspectToStringFormat = "{0:C}";
+            this.growthColumn.Groupable = false;
             this.growthColumn.Renderer = this.growthPriceRenderer;
             this.growthColumn.Text = "Growth EP";
             this.growthColumn.Width = 90;
@@ -314,6 +344,7 @@
             // 
             this.divColumn.AspectName = "DEP";
             this.divColumn.AspectToStringFormat = "{0:C}";
+            this.divColumn.Groupable = false;
             this.divColumn.Renderer = this.dividendPriceRenderer;
             this.divColumn.Text = "Dividend EP";
             this.divColumn.Width = 90;
@@ -322,6 +353,7 @@
             // 
             this.assetColumn.AspectName = "AEP";
             this.assetColumn.AspectToStringFormat = "{0:C}";
+            this.assetColumn.Groupable = false;
             this.assetColumn.Renderer = this.assetPriceRenderer;
             this.assetColumn.Text = "Asset EP";
             this.assetColumn.Width = 90;
@@ -329,22 +361,26 @@
             // bizColumn
             // 
             this.bizColumn.AspectName = "BizConf";
+            this.bizColumn.Groupable = false;
             this.bizColumn.Text = "Biz Conf";
             this.bizColumn.Width = 90;
+            // 
+            // strengthColumn
+            // 
+            this.strengthColumn.AspectName = "Strength";
+            this.strengthColumn.Groupable = false;
+            this.strengthColumn.ImageAspectName = "StrengthImg";
+            this.strengthColumn.IsEditable = false;
+            this.strengthColumn.Text = "Strength";
+            this.strengthColumn.Width = 120;
             // 
             // dateColumn
             // 
             this.dateColumn.AspectName = "LastUpdate";
             this.dateColumn.AspectToStringFormat = "{0:d}";
+            this.dateColumn.Groupable = false;
             this.dateColumn.Text = "Last Updated";
-            this.dateColumn.Width = 122;
-            // 
-            // CountryImageList
-            // 
-            this.CountryImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("CountryImageList.ImageStream")));
-            this.CountryImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.CountryImageList.Images.SetKeyName(0, "SG");
-            this.CountryImageList.Images.SetKeyName(1, "US");
+            this.dateColumn.Width = 90;
             // 
             // ValueInvestingForm
             // 
@@ -412,5 +448,7 @@
         private BrightIdeasSoftware.ObjectListView SearchOLV;
         private BrightIdeasSoftware.OLVColumn olvStockColumn;
         private System.Windows.Forms.ImageList CountryImageList;
+        private BrightIdeasSoftware.OLVColumn strengthColumn;
+        private System.Windows.Forms.ImageList StockImageList;
     }
 }

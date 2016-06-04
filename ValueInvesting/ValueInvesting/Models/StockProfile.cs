@@ -10,7 +10,7 @@ namespace ValueInvesting.Models
     [Serializable]
     public class StockProfile : Stock
     {
-        public StockProfile(String aSymbol)
+        public StockProfile( String aSymbol )
         {
             this.Sym = aSymbol;
             this.Moat = 0;
@@ -169,9 +169,30 @@ namespace ValueInvesting.Models
             get; set;
         }
 
-        public void Compute()
+        public int LongStrength
         {
+            get; set;
+        }
 
+        public int ShortStrength
+        {
+            get; set;
+        }
+
+        public String Strength
+        {
+            get
+            {
+                return ( LongStrength > ShortStrength ? "LONG" : "SHORT" );
+            }
+        }
+
+        public String StrengthImg
+        {
+            get
+            {
+                return String.Format( "Strength-{0}", ( Math.Max( LongStrength, ShortStrength ) ) );
+            }
         }
 
         public Boolean ComputeAssetPrice()
@@ -179,5 +200,7 @@ namespace ValueInvesting.Models
             this.AEP = this.Last / this.BookValue * 0.8;
             return true;
         }
+
+
     }
 }

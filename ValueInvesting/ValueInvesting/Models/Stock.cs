@@ -29,7 +29,7 @@ namespace ValueInvesting.Models
         {
             get
             {
-               return this.Market.ToString();
+                return this.Market.ToString();
             }
         }
 
