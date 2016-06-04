@@ -26,7 +26,7 @@ namespace ValueInvesting.Parsers
             x - exchange
         */
 
-        public const String QUERY_STR = "http://finance.yahoo.com/d/quotes.csv?s=@TICK&f=npsxr5";
+        public const String QUERY_STR = "http://finance.yahoo.com/d/quotes.csv?s=@TICK&f=npsxr5e";
 
         public const String PROFILE_STR = "https://finance.yahoo.com/q/pr?s=@TICK+profile";
 
@@ -67,8 +67,8 @@ namespace ValueInvesting.Parsers
             }
             if ( nDataArray[4] != "N/A" )
                 this.mStock.PEG = Double.Parse( nDataArray[4] );
-            //if ( nDataArray[5] != "N/A" )
-            //    this.mStock.EPS = Double.Parse( nDataArray[5] );
+            if ( nDataArray[5] != "N/A" )
+                this.mStock.EPS = Double.Parse( nDataArray[5] );
             //if ( nDataArray[6] != "N/A" )
             //    this.mStock.NextEPS = Double.Parse( nDataArray[6] );
             return true;

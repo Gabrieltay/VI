@@ -1,0 +1,3 @@
+﻿1) To read EPS, Dividend from Yahoo Finance
+2) Create Screener Parser for FinViz
+3) Create Class to compute Strength Indicator
