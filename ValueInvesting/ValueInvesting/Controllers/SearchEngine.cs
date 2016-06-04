@@ -20,6 +20,7 @@ namespace ValueInvesting.Controllers
             this.Stocks = new List<Stock>();
             StartParse( @"Stocks/NASDAQ.txt", "NASDAQ", Enums.Market.US );
             StartParse( @"Stocks/NYSE.txt", "NYSE", Enums.Market.US );
+            StartParse( @"Stocks/AMEX.txt", "AMEX", Enums.Market.US );
             StartParse( @"Stocks/SGX.txt", "SGX", Enums.Market.SG);
         }
 

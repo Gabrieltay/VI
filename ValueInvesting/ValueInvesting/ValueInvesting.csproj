@@ -264,6 +264,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Stock.ico" />
+    <Content Include="Stocks\AMEX.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Stocks\NASDAQ.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

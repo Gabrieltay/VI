@@ -15,6 +15,8 @@ namespace ValueInvesting.Utils
                 return "NASDAQ";
             else if ( aCode == "NYQ" )
                 return "NYSE";
+            else if ( aCode == "ASE" || aCode == "PCX" )
+                return "AMEX";
             else if ( aCode == "SES" )
                 return "SGX";
             return aCode;
