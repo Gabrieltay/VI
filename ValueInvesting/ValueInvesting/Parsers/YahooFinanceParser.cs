@@ -92,6 +92,11 @@ namespace ValueInvesting.Parsers
             throw new NotImplementedException();
         }
 
+        public override bool StartJson( string aJsonString )
+        {
+            throw new NotImplementedException();
+        }
+
         private StockProfile mStock
         {
             get; set;

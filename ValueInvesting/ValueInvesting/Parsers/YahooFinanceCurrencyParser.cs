@@ -32,6 +32,11 @@ namespace ValueInvesting.Parsers
             throw new NotImplementedException();
         }
 
+        public override bool StartJson( string aJsonString )
+        {
+            throw new NotImplementedException();
+        }
+
         public double Rate
         {
             get;set;

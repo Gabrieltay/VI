@@ -52,4 +52,19 @@ namespace ValueInvesting.Renderers
 
         }
     }
+
+    public class JittaPriceRenderer : BaseRenderer
+    {
+        public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
+        {
+            base.Render( g, r );
+            StockProfile nStock = (StockProfile)this.RowObject;
+            if ( nStock.JEP > nStock.Last )
+            {
+                g.FillRectangle( System.Drawing.Brushes.LightGreen, r );
+                g.DrawString( this.GetText(), this.Font, System.Drawing.Brushes.Black, r, this.StringFormatForGdiPlus );
+            }
+
+        }
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ValueInvesting.Commons;
 using ValueInvesting.Controllers;
@@ -13,6 +14,8 @@ namespace ValueInvesting.Parsers
     public class MorningStarParser : AbstractParser
     {
         public const String QUERY_STR = "http://financials.morningstar.com/ajax/exportKR2CSV.html?t=@TICK";
+
+        private Regex CSVParser = new Regex( ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))" );
 
         public MorningStarParser( StockProfile aStock )
         {
@@ -136,7 +139,8 @@ namespace ValueInvesting.Parsers
 
         private void parseCashFlow( String aRow )
         {
-            string[] nCols = aRow.Split( ',' );
+            
+            string[] nCols = CSVParser.Split(aRow);
             if ( nCols.Length != 12 )
             {
                 return;
@@ -144,7 +148,8 @@ namespace ValueInvesting.Parsers
 
             for ( int i = 6; i < 11; i++ )
             {
-                double nInFlow = String.IsNullOrEmpty( nCols[i] ) ? 0 : Double.Parse( nCols[i] );
+                String nValue = nCols[i].Replace( ",", "" ).Replace( "\"", "" );
+                double nInFlow = String.IsNullOrEmpty( nCols[i] ) ? 0 : Double.Parse( nValue );
                 if ( nInFlow < 0 )
                 {
                     this.mStock.InFlowCash = false;
@@ -245,6 +250,11 @@ namespace ValueInvesting.Parsers
         }
 
         public override bool StartTXT( string aTxtString )
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool StartJson( string aJsonString )
         {
             throw new NotImplementedException();
         }

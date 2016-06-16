@@ -22,6 +22,8 @@ namespace ValueInvesting.Views
 {
     public partial class ValueInvestingForm : Form
     {
+        private const String API_KEY = "c04dc410317711e69eba39bd4aca75eb";
+
         public ValueInvestingForm()
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace ValueInvesting.Views
             this.SearchOLV.Hide();
         }
 
-        private void StockQuery( StockProfile aStock, Boolean Editable = false, Boolean Save = false )
+        private async void StockQuery( StockProfile aStock, Boolean Editable = false, Boolean Save = false )
         {
             String nYahooQueryStr = YahooFinanceParser.QUERY_STR;
             String nYahooSymbol = aStock.Sym;
@@ -83,6 +85,13 @@ namespace ValueInvesting.Views
             String nMorningOutStr = RESTController.GetREST( nMorningQueryStr );
             MorningStarParser nMorningParser = new MorningStarParser( aStock );
             if ( !nMorningParser.StartCSV( nMorningOutStr ) )
+                return;
+
+            String nJittaQueryStr = JittaParser.QUERY_STR;
+            nJittaQueryStr = nJittaQueryStr.Replace( "@TICK", nMorningSymbol ).Replace( "@MKT", aStock.Mkt );
+            String nJittaOutStr = await HTTPController.GetREQUEST( nJittaQueryStr, API_KEY );
+            JittaParser nJittaParser = new JittaParser( aStock );
+            if ( !nJittaParser.StartJson( nJittaOutStr ) )
                 return;
 
             aStock.LastUpdate = DateTime.Now;

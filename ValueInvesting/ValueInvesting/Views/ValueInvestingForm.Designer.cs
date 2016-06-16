@@ -56,6 +56,9 @@
             this.dividendPriceRenderer = new ValueInvesting.Renderers.DividendPriceRenderer();
             this.assetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.assetPriceRenderer = new ValueInvesting.Renderers.AssetPriceRenderer();
+            this.jepColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.jittaPriceRenderer = new ValueInvesting.Renderers.JittaPriceRenderer();
+            this.jittaColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.strengthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -68,7 +71,7 @@
             this.tickTxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tickTxtbox.Location = new System.Drawing.Point(790, 37);
             this.tickTxtbox.Name = "tickTxtbox";
-            this.tickTxtbox.Size = new System.Drawing.Size(243, 19);
+            this.tickTxtbox.Size = new System.Drawing.Size(358, 19);
             this.tickTxtbox.TabIndex = 0;
             this.tickTxtbox.TextChanged += new System.EventHandler(this.tickTxtbox_TextChanged);
             this.tickTxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tickTxtbox_KeyDown);
@@ -203,7 +206,7 @@
             this.SearchOLV.Name = "SearchOLV";
             this.SearchOLV.RowHeight = 54;
             this.SearchOLV.ShowGroups = false;
-            this.SearchOLV.Size = new System.Drawing.Size(243, 21);
+            this.SearchOLV.Size = new System.Drawing.Size(358, 21);
             this.SearchOLV.SmallImageList = this.CountryImageList;
             this.SearchOLV.TabIndex = 12;
             this.SearchOLV.UseCompatibleStateImageBehavior = false;
@@ -218,7 +221,7 @@
             this.olvStockColumn.IsEditable = false;
             this.olvStockColumn.MinimumWidth = 40;
             this.olvStockColumn.Text = "Symbol";
-            this.olvStockColumn.Width = 240;
+            this.olvStockColumn.Width = 357;
             // 
             // CountryImageList
             // 
@@ -251,6 +254,8 @@
             this.watchlistOLV.AllColumns.Add(this.growthColumn);
             this.watchlistOLV.AllColumns.Add(this.divColumn);
             this.watchlistOLV.AllColumns.Add(this.assetColumn);
+            this.watchlistOLV.AllColumns.Add(this.jepColumn);
+            this.watchlistOLV.AllColumns.Add(this.jittaColumn);
             this.watchlistOLV.AllColumns.Add(this.bizColumn);
             this.watchlistOLV.AllColumns.Add(this.strengthColumn);
             this.watchlistOLV.AllColumns.Add(this.dateColumn);
@@ -266,8 +271,9 @@
             this.growthColumn,
             this.divColumn,
             this.assetColumn,
+            this.jepColumn,
+            this.jittaColumn,
             this.bizColumn,
-            this.strengthColumn,
             this.dateColumn});
             this.watchlistOLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.watchlistOLV.FullRowSelect = true;
@@ -275,7 +281,7 @@
             this.watchlistOLV.ItemRenderer = this.growthPriceRenderer;
             this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
             this.watchlistOLV.Name = "watchlistOLV";
-            this.watchlistOLV.Size = new System.Drawing.Size(1020, 395);
+            this.watchlistOLV.Size = new System.Drawing.Size(1135, 395);
             this.watchlistOLV.SmallImageList = this.StockImageList;
             this.watchlistOLV.TabIndex = 5;
             this.watchlistOLV.UseCompatibleStateImageBehavior = false;
@@ -332,19 +338,38 @@
             this.assetColumn.Text = "Asset EP";
             this.assetColumn.Width = 90;
             // 
+            // jepColumn
+            // 
+            this.jepColumn.AspectName = "JEP";
+            this.jepColumn.AspectToStringFormat = "{0:C}";
+            this.jepColumn.Groupable = false;
+            this.jepColumn.IsEditable = false;
+            this.jepColumn.Renderer = this.jittaPriceRenderer;
+            this.jepColumn.Text = "Jitta EP";
+            this.jepColumn.Width = 90;
+            // 
+            // jittaColumn
+            // 
+            this.jittaColumn.AspectName = "JittaScore";
+            this.jittaColumn.Groupable = false;
+            this.jittaColumn.Text = "Jitta Score";
+            this.jittaColumn.Width = 90;
+            // 
             // bizColumn
             // 
             this.bizColumn.AspectName = "BizConf";
             this.bizColumn.Groupable = false;
             this.bizColumn.Text = "Biz Conf";
-            this.bizColumn.Width = 90;
+            this.bizColumn.Width = 70;
             // 
             // strengthColumn
             // 
             this.strengthColumn.AspectName = "Strength";
+            this.strengthColumn.DisplayIndex = 9;
             this.strengthColumn.Groupable = false;
             this.strengthColumn.ImageAspectName = "StrengthImg";
             this.strengthColumn.IsEditable = false;
+            this.strengthColumn.IsVisible = false;
             this.strengthColumn.Text = "Strength";
             this.strengthColumn.Width = 120;
             // 
@@ -361,7 +386,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1045, 525);
+            this.ClientSize = new System.Drawing.Size(1160, 525);
             this.Controls.Add(this.SearchOLV);
             this.Controls.Add(this.infoButton);
             this.Controls.Add(this.chartButton);
@@ -420,5 +445,8 @@
         private System.Windows.Forms.ImageList CountryImageList;
         private BrightIdeasSoftware.OLVColumn strengthColumn;
         private System.Windows.Forms.ImageList StockImageList;
+        private BrightIdeasSoftware.OLVColumn jepColumn;
+        private BrightIdeasSoftware.OLVColumn jittaColumn;
+        private Renderers.JittaPriceRenderer jittaPriceRenderer;
     }
 }

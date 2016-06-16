@@ -125,6 +125,7 @@
     <Compile Include="Commons\Config.cs" />
     <Compile Include="Commons\Enums.cs" />
     <Compile Include="Controllers\ConfigManager.cs" />
+    <Compile Include="Controllers\HTTPController.cs" />
     <Compile Include="Controllers\RESTController.cs" />
     <Compile Include="Controllers\SearchEngine.cs" />
     <Compile Include="Controllers\WatchlistController.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Observers\WatchlistObserver.cs" />
     <Compile Include="Parsers\AbstractParser.cs" />
     <Compile Include="Parsers\EodDataSymbolsParser.cs" />
+    <Compile Include="Parsers\JittaParser.cs" />
     <Compile Include="Parsers\MorningStarParser.cs" />
     <Compile Include="Parsers\YahooFinanceCurrencyParser.cs" />
     <Compile Include="Parsers\YahooFinanceDownloader.cs" />

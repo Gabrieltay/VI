@@ -104,9 +104,9 @@
             this.groupBox1.Controls.Add(this.GepLabel);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(15, 130);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(112, 81);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -133,9 +133,9 @@
             this.groupBox2.Controls.Add(this.DepLabel);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(133, 130);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(112, 81);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -160,9 +160,9 @@
             this.groupBox3.Controls.Add(this.AepLabel);
             this.groupBox3.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(250, 130);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(112, 81);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
@@ -195,9 +195,9 @@
             this.groupBox4.Controls.Add(this.moatCombobox);
             this.groupBox4.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(285, 217);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(194, 162);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
@@ -210,7 +210,7 @@
             "HIGH",
             "LOW"});
             this.keyComboBox.Location = new System.Drawing.Point(129, 130);
-            this.keyComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.keyComboBox.Name = "keyComboBox";
             this.keyComboBox.Size = new System.Drawing.Size(55, 23);
             this.keyComboBox.TabIndex = 17;
@@ -234,7 +234,7 @@
             "HIGH",
             "LOW"});
             this.sciComboBox.Location = new System.Drawing.Point(129, 107);
-            this.sciComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sciComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.sciComboBox.Name = "sciComboBox";
             this.sciComboBox.Size = new System.Drawing.Size(55, 23);
             this.sciComboBox.TabIndex = 15;
@@ -258,7 +258,7 @@
             "HIGH",
             "LOW"});
             this.infComboBox.Location = new System.Drawing.Point(129, 81);
-            this.infComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.infComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.infComboBox.Name = "infComboBox";
             this.infComboBox.Size = new System.Drawing.Size(55, 23);
             this.infComboBox.TabIndex = 13;
@@ -282,7 +282,7 @@
             "HIGH",
             "LOW"});
             this.regComboBox.Location = new System.Drawing.Point(129, 57);
-            this.regComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.regComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.regComboBox.Name = "regComboBox";
             this.regComboBox.Size = new System.Drawing.Size(55, 23);
             this.regComboBox.TabIndex = 11;
@@ -309,7 +309,7 @@
             "Moat is present but unclear",
             "No Foreseeable Moat"});
             this.moatCombobox.Location = new System.Drawing.Point(8, 27);
-            this.moatCombobox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.moatCombobox.Margin = new System.Windows.Forms.Padding(2);
             this.moatCombobox.Name = "moatCombobox";
             this.moatCombobox.Size = new System.Drawing.Size(176, 23);
             this.moatCombobox.TabIndex = 0;
@@ -320,9 +320,9 @@
             this.groupBox5.Controls.Add(this.JepLabel);
             this.groupBox5.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.Location = new System.Drawing.Point(367, 131);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(112, 81);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
@@ -339,6 +339,8 @@
             this.JepLabel.TabIndex = 7;
             this.JepLabel.Text = "JEP";
             this.JepLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.JepLabel.MouseLeave += new System.EventHandler(this.JepLabel_MouseLeave);
+            this.JepLabel.MouseHover += new System.EventHandler(this.JepLabel_MouseHover);
             // 
             // label1
             // 
@@ -372,7 +374,7 @@
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.Image = global::ValueInvesting.Properties.Resources.Add;
             this.addButton.Location = new System.Drawing.Point(315, 384);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addButton.Margin = new System.Windows.Forms.Padding(2);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 81);
             this.addButton.TabIndex = 9;
@@ -388,7 +390,7 @@
             this.delButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delButton.Image = global::ValueInvesting.Properties.Resources.Delete;
             this.delButton.Location = new System.Drawing.Point(404, 384);
-            this.delButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.delButton.Margin = new System.Windows.Forms.Padding(2);
             this.delButton.Name = "delButton";
             this.delButton.Size = new System.Drawing.Size(75, 81);
             this.delButton.TabIndex = 10;
@@ -401,9 +403,9 @@
             this.groupBox6.Controls.Add(this.sumTxtbox);
             this.groupBox6.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.Location = new System.Drawing.Point(15, 217);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(266, 245);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
@@ -414,7 +416,7 @@
             this.sumTxtbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sumTxtbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sumTxtbox.Location = new System.Drawing.Point(2, 15);
-            this.sumTxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sumTxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.sumTxtbox.Multiline = true;
             this.sumTxtbox.Name = "sumTxtbox";
             this.sumTxtbox.ReadOnly = true;
@@ -442,7 +444,7 @@
             this.Controls.Add(this.stockNameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "StockProfilingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

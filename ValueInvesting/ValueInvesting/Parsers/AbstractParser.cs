@@ -13,5 +13,7 @@ namespace ValueInvesting.Parsers
         public abstract Boolean StartHTML( String aHtmlString );
 
         public abstract Boolean StartTXT( String aTxtString );
+
+        public abstract Boolean StartJson( String aJsonString );
     }
 }

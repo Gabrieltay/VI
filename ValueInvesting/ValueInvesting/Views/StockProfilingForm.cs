@@ -48,6 +48,11 @@ namespace ValueInvesting.Views
             else
                 this.AepLabel.Text = String.Format( "{0:C2}", this.mStock.AEP );
 
+            if ( this.mStock.JEP < 1.0 )
+                this.JepLabel.Text = String.Format( "{0:C3}", this.mStock.JEP );
+            else
+                this.JepLabel.Text = String.Format( "{0:C2}", this.mStock.JEP );
+
             this.moatCombobox.Text = (String)this.moatCombobox.Items[4-this.mStock.Moat];
             this.regComboBox.Text = this.mStock.Regulatory ? "HIGH" : "LOW";
             this.infComboBox.Text = this.mStock.Inflation ? "HIGH" : "LOW";
@@ -139,6 +144,19 @@ namespace ValueInvesting.Views
             this.infoTooltip.Hide( this.AepLabel );
         }
 
+        private void JepLabel_MouseHover( object sender, EventArgs e )
+        {
+            String nDisplay = String.Format( "{0:0.00}%\n{1} Jitta Line", 
+                ( this.mStock.JittaLine < 0 ? this.mStock.JittaLine * -1 : this.mStock.JittaLine),
+                ( this.mStock.JittaLine < 0 ? "Below" : "Above" ) );
+            this.infoTooltip.Show( nDisplay, this.JepLabel );
+        }
+
+        private void JepLabel_MouseLeave( object sender, EventArgs e )
+        {
+            this.infoTooltip.Hide( this.JepLabel );
+        }
+
         private void addButton_Click( object sender, EventArgs e )
         {
             WatchlistController.getInstance().Add( this.mStock );
@@ -164,5 +182,7 @@ namespace ValueInvesting.Views
             WatchlistController.getInstance().Delete( this.mStock );
             this.Close();
         }
+
+        
     }
 }

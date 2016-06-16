@@ -62,6 +62,12 @@ namespace ValueInvesting.Models
             get; set;
         }
 
+        // Jitta Price
+        public double JEP
+        {
+            get; set;
+        }
+
         // Business Confidence
         public double BizConf
         {
@@ -165,6 +171,17 @@ namespace ValueInvesting.Models
         }
 
         public Boolean KeyPeople
+        {
+            get; set;
+        }
+
+        // Jitta
+        public double JittaScore
+        {
+            get; set;
+        }
+
+        public double JittaLine
         {
             get; set;
         }

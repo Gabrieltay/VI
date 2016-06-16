@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ValueInvesting.Models;
-using ValueInvesting.Parsers;
 
 namespace ValueInvesting.Parsers
 {
-    public class EodDataSymbolsParser : AbstractParser
+    public class JittaParser : AbstractParser
     {
-        public EodDataSymbolsParser(Stock aStock)
+        public const String QUERY_STR = "https://www.jitta.com/api/v1/stocks?id=@MKT:@TICK";
+
+        public JittaParser(StockProfile aStock)
         {
-            this.mStocks = aStock;
+            this.mStock = aStock;
         }
 
         public override bool StartCSV( string aCsvString )
@@ -27,20 +29,19 @@ namespace ValueInvesting.Parsers
 
         public override bool StartTXT( string aTxtString )
         {
-            int nDelimiter = aTxtString.IndexOf( '\t' );
-            String nSym = aTxtString.Substring( 0, nDelimiter );
-            String nName = aTxtString.Substring( nDelimiter+1, aTxtString.Length - nDelimiter - 1 );
-            this.mStocks.Sym = nSym;
-            this.mStocks.Name = nName;
-            return true;                   
+            throw new NotImplementedException();
         }
 
         public override bool StartJson( string aJsonString )
         {
-            throw new NotImplementedException();
+            dynamic dynObj = JsonConvert.DeserializeObject( aJsonString );
+            this.mStock.JittaScore = dynObj.jitta_score;
+            this.mStock.JittaLine = dynObj.jitta_line;
+            this.mStock.JEP = dynObj.price.close * ( 1 - ( this.mStock.JittaLine / 100 ) );
+            return true;
         }
 
-        public Stock mStocks
+        private StockProfile mStock
         {
             get; set;
         }
