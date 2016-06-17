@@ -34,7 +34,7 @@ namespace ValueInvesting.Controllers
             return true;
         }
 
-        public bool QueryStockData( StockData aStockData )
+        public bool QueryStockData( ref StockData aStockData )
         {
             if ( !Directory.Exists( @"data" ) )
                 Directory.CreateDirectory( @"data" );

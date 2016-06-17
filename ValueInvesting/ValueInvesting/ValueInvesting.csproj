@@ -117,6 +117,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\Ema20CrossEma40.cs" />
+    <Compile Include="Algorithms\Ema40CrossEma20.cs" />
+    <Compile Include="Algorithms\IRuleInterface.cs" />
+    <Compile Include="Algorithms\MacdCrossAboveZero.cs" />
+    <Compile Include="Algorithms\MacdCrossBelowZero.cs" />
+    <Compile Include="Algorithms\MacdCrossSignal.cs" />
+    <Compile Include="Algorithms\MacdHistogramBear.cs" />
+    <Compile Include="Algorithms\MacdHistogramBull.cs" />
+    <Compile Include="Algorithms\ParabolicSarBear.cs" />
+    <Compile Include="Algorithms\ParabolicSarBull.cs" />
+    <Compile Include="Algorithms\Rule.cs" />
+    <Compile Include="Algorithms\SignalCrossMacd.cs" />
+    <Compile Include="Algorithms\Sma50Sma150Down.cs" />
+    <Compile Include="Algorithms\Sma50Sma150Up.cs" />
+    <Compile Include="Algorithms\StochasticCrossAbove.cs" />
+    <Compile Include="Algorithms\StochasticCrossBelow.cs" />
+    <Compile Include="Algorithms\StochasticOverBought.cs" />
+    <Compile Include="Algorithms\StochasticOverSold.cs" />
     <Compile Include="Base\Base.cs" />
     <Compile Include="Base\Observer.cs" />
     <Compile Include="Base\Singleton.cs" />
@@ -129,6 +147,7 @@
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\RESTController.cs" />
     <Compile Include="Controllers\SearchEngine.cs" />
+    <Compile Include="Controllers\TAController.cs" />
     <Compile Include="Controllers\WatchlistController.cs" />
     <Compile Include="Models\CandleStick.cs" />
     <Compile Include="Models\MacdPoint.cs" />

@@ -69,9 +69,9 @@
             // tickTxtbox
             // 
             this.tickTxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tickTxtbox.Location = new System.Drawing.Point(790, 37);
+            this.tickTxtbox.Location = new System.Drawing.Point(894, 37);
             this.tickTxtbox.Name = "tickTxtbox";
-            this.tickTxtbox.Size = new System.Drawing.Size(358, 19);
+            this.tickTxtbox.Size = new System.Drawing.Size(278, 19);
             this.tickTxtbox.TabIndex = 0;
             this.tickTxtbox.TextChanged += new System.EventHandler(this.tickTxtbox_TextChanged);
             this.tickTxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tickTxtbox_KeyDown);
@@ -201,12 +201,12 @@
             this.SearchOLV.FullRowSelect = true;
             this.SearchOLV.GridLines = true;
             this.SearchOLV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.SearchOLV.Location = new System.Drawing.Point(790, 62);
+            this.SearchOLV.Location = new System.Drawing.Point(894, 62);
             this.SearchOLV.MultiSelect = false;
             this.SearchOLV.Name = "SearchOLV";
             this.SearchOLV.RowHeight = 54;
             this.SearchOLV.ShowGroups = false;
-            this.SearchOLV.Size = new System.Drawing.Size(358, 21);
+            this.SearchOLV.Size = new System.Drawing.Size(278, 21);
             this.SearchOLV.SmallImageList = this.CountryImageList;
             this.SearchOLV.TabIndex = 12;
             this.SearchOLV.UseCompatibleStateImageBehavior = false;
@@ -221,7 +221,7 @@
             this.olvStockColumn.IsEditable = false;
             this.olvStockColumn.MinimumWidth = 40;
             this.olvStockColumn.Text = "Symbol";
-            this.olvStockColumn.Width = 357;
+            this.olvStockColumn.Width = 270;
             // 
             // CountryImageList
             // 
@@ -274,6 +274,7 @@
             this.jepColumn,
             this.jittaColumn,
             this.bizColumn,
+            this.strengthColumn,
             this.dateColumn});
             this.watchlistOLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.watchlistOLV.FullRowSelect = true;
@@ -281,7 +282,7 @@
             this.watchlistOLV.ItemRenderer = this.growthPriceRenderer;
             this.watchlistOLV.Location = new System.Drawing.Point(13, 118);
             this.watchlistOLV.Name = "watchlistOLV";
-            this.watchlistOLV.Size = new System.Drawing.Size(1135, 395);
+            this.watchlistOLV.Size = new System.Drawing.Size(1159, 395);
             this.watchlistOLV.SmallImageList = this.StockImageList;
             this.watchlistOLV.TabIndex = 5;
             this.watchlistOLV.UseCompatibleStateImageBehavior = false;
@@ -365,13 +366,11 @@
             // strengthColumn
             // 
             this.strengthColumn.AspectName = "Strength";
-            this.strengthColumn.DisplayIndex = 9;
             this.strengthColumn.Groupable = false;
             this.strengthColumn.ImageAspectName = "StrengthImg";
             this.strengthColumn.IsEditable = false;
-            this.strengthColumn.IsVisible = false;
             this.strengthColumn.Text = "Strength";
-            this.strengthColumn.Width = 120;
+            this.strengthColumn.Width = 130;
             // 
             // dateColumn
             // 
@@ -386,7 +385,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1160, 525);
+            this.ClientSize = new System.Drawing.Size(1184, 525);
             this.Controls.Add(this.SearchOLV);
             this.Controls.Add(this.infoButton);
             this.Controls.Add(this.chartButton);

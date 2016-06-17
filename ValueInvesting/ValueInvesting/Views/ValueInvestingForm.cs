@@ -61,10 +61,21 @@ namespace ValueInvesting.Views
             if ( !nResult )
                 return;
 
-            //Temp Testing
-            Random nRdm = new Random();
-            aStock.ShortStrength = nRdm.Next( 1, 10 );
-            aStock.LongStrength = nRdm.Next( 1, 10 );
+            StockData nStockData = new StockData();
+            nStockData.Name = aStock.Name;
+            nStockData.Sym = aStock.Sym;
+            nStockData.Mkt = aStock.Mkt;
+            nStockData.Market = aStock.Market;
+            nResult = nController.QueryStockData( ref nStockData );
+
+            TAController nTACont = new TAController( nStockData );
+            nTACont.Compute();
+
+            TAUtil.Hammar( nStockData );
+            TAUtil.Doji( nStockData );
+
+            aStock.ShortStrength = nTACont.BearStrength;
+            aStock.LongStrength = nTACont.BullStrength;
 
             if ( Editable )
             {
@@ -81,7 +92,7 @@ namespace ValueInvesting.Views
         private void StockDownload( ref StockData aStockData )
         {
             QueryController nController = new QueryController();
-            nController.QueryStockData( aStockData );
+            nController.QueryStockData( ref aStockData );
         }
 
         private void New()
@@ -286,7 +297,7 @@ namespace ValueInvesting.Views
             int i = 0;
             foreach ( StockProfile nStock in nStocks )
             {
-                if ( nStock.LastUpdate.Date != DateTime.Now.Date )
+                //if ( nStock.LastUpdate.Date != DateTime.Now.Date )
                     this.StockQuery( nStock );
                 this.updateWorker.ReportProgress( ++i, nStock );
             }
