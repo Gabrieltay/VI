@@ -126,6 +126,7 @@
     <Compile Include="Commons\Enums.cs" />
     <Compile Include="Controllers\ConfigManager.cs" />
     <Compile Include="Controllers\HTTPController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\RESTController.cs" />
     <Compile Include="Controllers\SearchEngine.cs" />
     <Compile Include="Controllers\WatchlistController.cs" />

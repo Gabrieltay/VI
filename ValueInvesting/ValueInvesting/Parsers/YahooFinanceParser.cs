@@ -43,7 +43,7 @@ namespace ValueInvesting.Parsers
             //    return false;
 
             Regex CSVParser = new Regex( ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))" );
-            string[] nDataArray = CSVParser.Split( aCsvString );
+            string[] nDataArray = CSVParser.Split( aCsvString.Replace( "\n", "" ) );
 
             if ( nDataArray[0] == "N/A" )
             {

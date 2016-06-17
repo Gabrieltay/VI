@@ -22,7 +22,6 @@ namespace ValueInvesting.Views
 {
     public partial class ValueInvestingForm : Form
     {
-        private const String API_KEY = "c04dc410317711e69eba39bd4aca75eb";
 
         public ValueInvestingForm()
         {
@@ -56,50 +55,17 @@ namespace ValueInvesting.Views
 
         private async void StockQuery( StockProfile aStock, Boolean Editable = false, Boolean Save = false )
         {
-            String nYahooQueryStr = YahooFinanceParser.QUERY_STR;
-            String nYahooSymbol = aStock.Sym;
-            String nMorningSymbol = aStock.Sym;
+            QueryController nController = new QueryController();
+            bool nResult = await nController.QueryStock( aStock );
 
-            if ( aStock.Market == Enums.Market.SG )
-            {
-                nYahooSymbol = nYahooSymbol + ".SI";
-                nMorningSymbol = "XSES:" + nMorningSymbol;
-            }
-
-            nYahooQueryStr = nYahooQueryStr.Replace( "@TICK", nYahooSymbol );
-
-            String nYahooCsvStr = RESTController.GetREST( nYahooQueryStr );
-            YahooFinanceParser nYahooParser = new YahooFinanceParser( aStock );
-            if ( !nYahooParser.StartCSV( nYahooCsvStr ) )
+            if ( !nResult )
                 return;
-
-            nYahooQueryStr = YahooFinanceParser.PROFILE_STR;
-            nYahooQueryStr = nYahooQueryStr.Replace( "@TICK", nYahooSymbol );
-
-            String nYahooHtmlStr = RESTController.GetREST( nYahooQueryStr );
-            if ( !nYahooParser.StartHTML( nYahooHtmlStr ) )
-                return;
-
-            String nMorningQueryStr = MorningStarParser.QUERY_STR;
-            nMorningQueryStr = nMorningQueryStr.Replace( "@TICK", nMorningSymbol );
-            String nMorningOutStr = RESTController.GetREST( nMorningQueryStr );
-            MorningStarParser nMorningParser = new MorningStarParser( aStock );
-            if ( !nMorningParser.StartCSV( nMorningOutStr ) )
-                return;
-
-            String nJittaQueryStr = JittaParser.QUERY_STR;
-            nJittaQueryStr = nJittaQueryStr.Replace( "@TICK", nMorningSymbol ).Replace( "@MKT", aStock.Mkt );
-            String nJittaOutStr = await HTTPController.GetREQUEST( nJittaQueryStr, API_KEY );
-            JittaParser nJittaParser = new JittaParser( aStock );
-            if ( !nJittaParser.StartJson( nJittaOutStr ) )
-                return;
-
-            aStock.LastUpdate = DateTime.Now;
 
             //Temp Testing
             Random nRdm = new Random();
             aStock.ShortStrength = nRdm.Next( 1, 10 );
             aStock.LongStrength = nRdm.Next( 1, 10 );
+
             if ( Editable )
             {
                 StockProfilingForm nForm = new StockProfilingForm( aStock );
@@ -114,54 +80,8 @@ namespace ValueInvesting.Views
 
         private void StockDownload( ref StockData aStockData )
         {
-            String nYahooDownloadStr = "";
-
-            String nDatafile = aStockData.Sym + "-" + aStockData.Market.ToString() + ".bin";
-
-            Boolean nExists = false;
-
-            if ( !Directory.Exists( @"data" ) )
-                Directory.CreateDirectory( @"data" );
-
-            if ( !File.Exists( @"data/" + nDatafile ) )
-            {
-                nYahooDownloadStr = YahooFinanceDownloader.QUERY_FULL_STR;
-            }
-            else
-            {
-                aStockData = Serializer.GetObjectFromFile<StockData>( @"data/" + nDatafile );
-
-                nYahooDownloadStr = YahooFinanceDownloader.QUERY_PARTIAL_STR;
-
-                if ( aStockData.LastDate.Date == DateTime.Now.Date )
-                {
-                    return; // No need update again
-                }
-
-                DateTime nStartDate = aStockData.LastDate;//.AddDays( 1 );
-                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SD", nStartDate.Day.ToString() );
-                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SM", ( nStartDate.Month - 1 ).ToString() );
-                nYahooDownloadStr = nYahooDownloadStr.Replace( "@SY", nStartDate.Year.ToString() );
-            }
-
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", ( DateTime.Now.Day ).ToString() );
-            //nYahooDownloadStr = nYahooDownloadStr.Replace( "@ED", "2" );
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EM", ( DateTime.Now.Month - 1 ).ToString() );
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@EY", DateTime.Now.Year.ToString() );
-
-            String nYahooSymbol = aStockData.Sym;
-            if ( aStockData.Market == Enums.Market.SG )
-            {
-                nYahooSymbol = nYahooSymbol + ".SI";
-            }
-
-            nYahooDownloadStr = nYahooDownloadStr.Replace( "@TICK", nYahooSymbol );
-
-            String nYahooOutStr = RESTController.GetREST( nYahooDownloadStr );
-            YahooFinanceDownloader nDownloader = new YahooFinanceDownloader( aStockData );
-            nDownloader.StartCSV( nYahooOutStr );
-
-            Serializer.SaveObjectToFile<StockData>( aStockData, @"data/" + nDatafile );
+            QueryController nController = new QueryController();
+            nController.QueryStockData( aStockData );
         }
 
         private void New()
