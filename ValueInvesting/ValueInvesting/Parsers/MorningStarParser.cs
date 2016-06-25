@@ -139,8 +139,8 @@ namespace ValueInvesting.Parsers
 
         private void parseCashFlow( String aRow )
         {
-            
-            string[] nCols = CSVParser.Split(aRow);
+
+            string[] nCols = CSVParser.Split( aRow );
             if ( nCols.Length != 12 )
             {
                 return;
@@ -188,41 +188,23 @@ namespace ValueInvesting.Parsers
             double nSum3 = 0.0;
             double nSum5 = 0.0;
             double nSum10 = 0.0;
-            double nMinGrowth = 0.0;
+            double nMinGrowth = 1000;
 
             string[] nCols3 = aRow3.Split( ',' );
-            if ( String.IsNullOrEmpty( nCols3[5] ) && String.IsNullOrEmpty( nCols3[6] ) )
-                nSum3 = 0.0;
-            else
-                for ( int i = 6; i < 11; i++ )
-                {
-                    nSum3 += String.IsNullOrEmpty( nCols3[i] ) ? 0.0 : double.Parse( nCols3[i] );
-                }
+
+            nSum3 = String.IsNullOrEmpty( nCols3[10] ) ? 0.0 : double.Parse( nCols3[10] );
 
             string[] nCols5 = aRow5.Split( ',' );
-            if ( String.IsNullOrEmpty( nCols5[5] ) && String.IsNullOrEmpty( nCols5[6] ) )
-                nSum5 = 0.0;
-            else
-                for ( int i = 6; i < 11; i++ )
-                {
-                    nSum5 += String.IsNullOrEmpty( nCols5[i] ) ? 0.0 : double.Parse( nCols5[i] );
-                }
+
+            nSum5 = String.IsNullOrEmpty( nCols5[10] ) ? 0.0 : double.Parse( nCols5[10] );
 
             string[] nCols10 = aRow10.Split( ',' );
-            if ( String.IsNullOrEmpty( nCols10[5] ) && String.IsNullOrEmpty( nCols10[6] ) )
-                nSum10 = 0.0;
-            else
-                for ( int i = 6; i < 11; i++ )
-                {
-                    nSum10 += String.IsNullOrEmpty( nCols10[i] ) ? 0.0 : double.Parse( nCols10[i] );
-                }
 
-            if ( nSum3 / 5 != 0.0 )
-                nMinGrowth = nSum3 / 5;
-            if ( nSum5 / 5 != 0.0 && nSum5 / 5 < nMinGrowth )
-                nMinGrowth = nSum5 / 5;
-            if ( nSum10 / 5 != 0.0 && nSum10 / 5 < nMinGrowth )
-                nMinGrowth = nSum10 / 5;
+            nSum10 = String.IsNullOrEmpty( nCols10[10] ) ? 0.0 : double.Parse( nCols10[10] );
+
+
+            nMinGrowth = Math.Min( nSum3, nSum5 );
+            nMinGrowth = Math.Min( nMinGrowth, nSum10 );
 
             if ( nMinGrowth != 0 )
             {

@@ -71,9 +71,6 @@ namespace ValueInvesting.Views
             TAController nTACont = new TAController( nStockData );
             nTACont.Compute();
 
-            TAUtil.Hammar( nStockData );
-            TAUtil.Doji( nStockData );
-
             aStock.ShortStrength = nTACont.BearStrength;
             aStock.LongStrength = nTACont.BullStrength;
 

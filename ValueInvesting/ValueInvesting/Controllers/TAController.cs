@@ -22,6 +22,8 @@ namespace ValueInvesting.Controllers
             this.UptrendRules.Add( new MacdHistogramBull() );
             this.UptrendRules.Add( new StochasticCrossAbove() );
             this.UptrendRules.Add( new StochasticOverSold() );
+            this.UptrendRules.Add( new WilliamROverSold() );
+            this.UptrendRules.Add( new HammerReversal() );
 
             this.DowntrendRules = new List<DowntrendRule>();
             this.DowntrendRules.Add( new Ema40CrossEma20() );
@@ -32,6 +34,8 @@ namespace ValueInvesting.Controllers
             this.DowntrendRules.Add( new MacdHistogramBear() );
             this.DowntrendRules.Add( new StochasticCrossBelow() );
             this.DowntrendRules.Add( new StochasticOverBought() );
+            this.DowntrendRules.Add( new WilliamROverBought() );
+            this.DowntrendRules.Add( new HangingManReversal() );
         }
 
         public void Compute()
@@ -55,8 +59,11 @@ namespace ValueInvesting.Controllers
                     nTotalBearIndicators += nDowntrendRule.Score;
             }
 
-            this.BullStrength = nTotalBullIndicators * 10 / UptrendRules.Count ;
-            this.BearStrength = nTotalBearIndicators * 10 / DowntrendRules.Count ;
+            this.BullStrength = nTotalBullIndicators;
+            this.BearStrength = nTotalBearIndicators;
+
+            //this.BullStrength = nTotalBullIndicators * 10 / UptrendRules.Count;
+            //this.BearStrength = nTotalBearIndicators * 10 / DowntrendRules.Count;
         }
 
         private StockData mStockData

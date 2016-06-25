@@ -125,7 +125,25 @@ namespace ValueInvesting.Utils
             return nOutput;
         }
 
-        public static void HangingMan(StockData aStock)
+        public static double[] WilliamR( StockData aStock, int aPeriod )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            double[] nOutReal = new double[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.WillR( nStartIndex, nEndIndex, nInHigh, nInLow, nInClose, aPeriod, out nOutBegIdx, out nOutNBElement, nOutReal );
+
+            double[] nOutput = new double[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutReal, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+            double n = nOutput[nEndIndex];
+            return nOutput;
+        }
+
+        public static Boolean HangingMan( StockData aStock )
         {
             int nStartIndex = 0;
             int nEndIndex = aStock.DataPoints.Count - 1;
@@ -141,18 +159,49 @@ namespace ValueInvesting.Utils
             int[] nOutput = new int[nEndIndex - nStartIndex + 1];
             Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
 
-            for ( int i = nEndIndex; i >= 0; i-- )
-            {
-                int nn;
-                if ( nOutput[i] != 0 )
-                {
-                    nn = nOutput[i];
-                    DateTime mm = aStock.DataPoints[i].Date;
-                }
-            }
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return ( nOutput[nEndIndex] != 0 );
         }
 
-        public static void Hammar( StockData aStock )
+        public static Boolean ShootingStar( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlShootingStar( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return ( nOutput[nEndIndex] != 0 );
+        }
+
+        public static Boolean Hammer( StockData aStock )
         {
             int nStartIndex = 0;
             int nEndIndex = aStock.DataPoints.Count - 1;
@@ -168,18 +217,49 @@ namespace ValueInvesting.Utils
             int[] nOutput = new int[nEndIndex - nStartIndex + 1];
             Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
 
-            for ( int i = nEndIndex; i >= 0; i-- )
-            {
-                int nn;
-                if ( nOutput[i] != 0 )
-                {
-                    nn = nOutput[i];
-                    DateTime mm = aStock.DataPoints[i].Date;
-                }
-            }
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return ( nOutput[nEndIndex] != 0 );
         }
 
-        public static void Doji( StockData aStock )
+        public static Boolean InvertedHammer( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlInvertedHammer( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return ( nOutput[nEndIndex] != 0 );
+        }
+
+        public static Boolean Doji( StockData aStock )
         {
             int nStartIndex = 0;
             int nEndIndex = aStock.DataPoints.Count - 1;
@@ -195,15 +275,17 @@ namespace ValueInvesting.Utils
             int[] nOutput = new int[nEndIndex - nStartIndex + 1];
             Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
 
-            for ( int i = nEndIndex; i >= 0; i-- )
-            {
-                int nn;
-                if ( nOutput[i] != 0 )
-                {
-                    nn = nOutput[i];
-                    DateTime mm = aStock.DataPoints[i].Date;
-                }
-            }
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return ( nOutput[nEndIndex] != 0 );
         }
 
         private static double[] getOpenValues( StockData aStock)

@@ -35,6 +35,8 @@ namespace ValueInvesting.Parsers
         public override bool StartJson( string aJsonString )
         {
             dynamic dynObj = JsonConvert.DeserializeObject( aJsonString );
+            if ( aJsonString.ToLower().Contains( "error" ) || aJsonString.Equals( "{}" ))
+                return false;
             this.mStock.JittaScore = dynObj.jitta_score;
             this.mStock.JittaLine = dynObj.jitta_line;
             this.mStock.JEP = dynObj.price.close * ( 1 - ( this.mStock.JittaLine / 100 ) );
