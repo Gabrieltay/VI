@@ -8,11 +8,13 @@ using ValueInvesting.Utils;
 
 namespace ValueInvesting.Algorithms
 {
-    public class HammerReversal : UptrendRule, IRuleInterface
+    public class CandlestickBearishReversal : DowntrendRule, IRuleInterface
     {
         public override void Compute( StockData aStockData )
         {
-            if ( TAUtil.Hammer(aStockData) || TAUtil.InvertedHammer(aStockData) )
+            if ( TAUtil.HangingMan( aStockData ) ||
+                TAUtil.ShootingStar( aStockData ) ||
+                TAUtil.DarkCloud( aStockData ) )
             {
                 this.Score = 1;
                 this.Signal = true;
@@ -21,7 +23,7 @@ namespace ValueInvesting.Algorithms
 
         public override string GetDescription()
         {
-            return "Candlestick Hammer Reversal";
+            return "Candlestick Bearish Reversal";
         }
     }
 }

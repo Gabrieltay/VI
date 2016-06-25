@@ -23,7 +23,7 @@ namespace ValueInvesting.Controllers
             this.UptrendRules.Add( new StochasticCrossAbove() );
             this.UptrendRules.Add( new StochasticOverSold() );
             this.UptrendRules.Add( new WilliamROverSold() );
-            this.UptrendRules.Add( new HammerReversal() );
+            this.UptrendRules.Add( new CandlestickBullishReversal() );
 
             this.DowntrendRules = new List<DowntrendRule>();
             this.DowntrendRules.Add( new Ema40CrossEma20() );
@@ -35,7 +35,7 @@ namespace ValueInvesting.Controllers
             this.DowntrendRules.Add( new StochasticCrossBelow() );
             this.DowntrendRules.Add( new StochasticOverBought() );
             this.DowntrendRules.Add( new WilliamROverBought() );
-            this.DowntrendRules.Add( new HangingManReversal() );
+            this.DowntrendRules.Add( new CandlestickBearishReversal() );
         }
 
         public void Compute()

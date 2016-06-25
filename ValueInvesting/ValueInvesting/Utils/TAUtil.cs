@@ -259,6 +259,44 @@ namespace ValueInvesting.Utils
             return ( nOutput[nEndIndex] != 0 );
         }
 
+        public static Boolean Piercing( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlPiercing( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            return ( nOutput[nEndIndex] != 0 );
+        }
+
+        public static Boolean DarkCloud( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlDarkCloudCover( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, 0.5, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            return ( nOutput[nEndIndex] != 0 );
+        }
+
         public static Boolean Doji( StockData aStock )
         {
             int nStartIndex = 0;

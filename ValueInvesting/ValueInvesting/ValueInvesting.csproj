@@ -119,8 +119,8 @@
   <ItemGroup>
     <Compile Include="Algorithms\Ema20CrossEma40.cs" />
     <Compile Include="Algorithms\Ema40CrossEma20.cs" />
-    <Compile Include="Algorithms\HammerReversal.cs" />
-    <Compile Include="Algorithms\HangingManReversal.cs" />
+    <Compile Include="Algorithms\CandlestickBullishReversal.cs" />
+    <Compile Include="Algorithms\CandlestickBearishReversal.cs" />
     <Compile Include="Algorithms\IRuleInterface.cs" />
     <Compile Include="Algorithms\MacdCrossAboveZero.cs" />
     <Compile Include="Algorithms\MacdCrossBelowZero.cs" />
