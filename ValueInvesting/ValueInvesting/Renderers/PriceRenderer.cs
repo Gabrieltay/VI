@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BrightIdeasSoftware;
 using ValueInvesting.Models;
+using System.Drawing;
 
 namespace ValueInvesting.Renderers
 {
@@ -13,13 +14,13 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            StockProfile nStock = (StockProfile) this.RowObject;
+            StockProfile nStock = (StockProfile)this.RowObject;
             if ( nStock.GEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );
                 g.DrawString( this.GetText(), this.Font, System.Drawing.Brushes.Black, r, this.StringFormatForGdiPlus );
             }
-            
+
         }
     }
 
@@ -28,7 +29,7 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            StockProfile nStock = (StockProfile) this.RowObject;
+            StockProfile nStock = (StockProfile)this.RowObject;
             if ( nStock.DEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );
@@ -43,7 +44,7 @@ namespace ValueInvesting.Renderers
         public override void Render( System.Drawing.Graphics g, System.Drawing.Rectangle r )
         {
             base.Render( g, r );
-            StockProfile nStock = (StockProfile) this.RowObject;
+            StockProfile nStock = (StockProfile)this.RowObject;
             if ( nStock.AEP > nStock.Last )
             {
                 g.FillRectangle( System.Drawing.Brushes.LightGreen, r );

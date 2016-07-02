@@ -297,6 +297,102 @@ namespace ValueInvesting.Utils
             return ( nOutput[nEndIndex] != 0 );
         }
 
+        public static int Engulfing( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlEngulfing( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            //for ( int i = nEndIndex; i >= 0; i-- )
+            //{
+            //    int nn;
+            //    if ( nOutput[i] != 0 )
+            //    {
+            //        nn = nOutput[i];
+            //        DateTime mm = aStock.DataPoints[i].Date;
+            //    }
+            //}
+
+            return nOutput[nEndIndex] ;
+        }
+
+        public static int Harami( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlHarami( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            return nOutput[nEndIndex];
+        }
+
+        public static int HaramiCross( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlHaramiCross( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+            
+            return nOutput[nEndIndex];
+        }
+
+        public static int CounterAttack( StockData aStock )
+        {
+            int nStartIndex = 0;
+            int nEndIndex = aStock.DataPoints.Count - 1;
+            double[] nInOpen = getOpenValues( aStock );
+            double[] nInClose = getCloseValues( aStock );
+            double[] nInHigh = getHighValues( aStock );
+            double[] nInLow = getLowValues( aStock );
+            int nOutBegIdx;
+            int nOutNBElement;
+            int[] nOutInteger = new int[nEndIndex - nStartIndex + 1];
+            TicTacTec.TA.Library.Core.CdlCounterAttack( nStartIndex, nEndIndex, nInOpen, nInHigh, nInLow, nInClose, out nOutBegIdx, out nOutNBElement, nOutInteger );
+
+            int[] nOutput = new int[nEndIndex - nStartIndex + 1];
+            Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
+
+            for ( int i = nEndIndex; i >= 0; i-- )
+            {
+                int nn;
+                if ( nOutput[i] != 0 )
+                {
+                    nn = nOutput[i];
+                    DateTime mm = aStock.DataPoints[i].Date;
+                }
+            }
+
+            return nOutput[nEndIndex];
+        }
+
         public static Boolean Doji( StockData aStock )
         {
             int nStartIndex = 0;
@@ -312,16 +408,6 @@ namespace ValueInvesting.Utils
 
             int[] nOutput = new int[nEndIndex - nStartIndex + 1];
             Array.Copy( nOutInteger, 0, nOutput, nOutBegIdx, nEndIndex - nOutBegIdx + 1 );
-
-            //for ( int i = nEndIndex; i >= 0; i-- )
-            //{
-            //    int nn;
-            //    if ( nOutput[i] != 0 )
-            //    {
-            //        nn = nOutput[i];
-            //        DateTime mm = aStock.DataPoints[i].Date;
-            //    }
-            //}
 
             return ( nOutput[nEndIndex] != 0 );
         }

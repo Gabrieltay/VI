@@ -61,6 +61,7 @@
             this.jittaColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.bizColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.strengthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.strengthRenderer = new ValueInvesting.Renderers.StrengthRenderer();
             this.dateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.SearchOLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.watchlistOLV)).BeginInit();
@@ -447,5 +448,6 @@
         private BrightIdeasSoftware.OLVColumn jepColumn;
         private BrightIdeasSoftware.OLVColumn jittaColumn;
         private Renderers.JittaPriceRenderer jittaPriceRenderer;
+        private Renderers.StrengthRenderer strengthRenderer;
     }
 }

@@ -14,7 +14,11 @@ namespace ValueInvesting.Algorithms
         {
             if ( TAUtil.Hammer( aStockData ) ||
                 TAUtil.InvertedHammer( aStockData ) ||
-                TAUtil.Piercing( aStockData ) )
+                TAUtil.Piercing( aStockData ) ||
+                TAUtil.Engulfing( aStockData ) > 0 ||
+                TAUtil.HaramiCross(aStockData) > 0 || 
+                TAUtil.Harami(aStockData) > 0 ||
+                TAUtil.CounterAttack(aStockData) > 0 )
             {
                 this.Score = 1;
                 this.Signal = true;

@@ -14,7 +14,11 @@ namespace ValueInvesting.Algorithms
         {
             if ( TAUtil.HangingMan( aStockData ) ||
                 TAUtil.ShootingStar( aStockData ) ||
-                TAUtil.DarkCloud( aStockData ) )
+                TAUtil.DarkCloud( aStockData ) ||
+                TAUtil.Engulfing( aStockData ) < 0 ||
+                TAUtil.HaramiCross( aStockData ) < 0 ||
+                TAUtil.Harami( aStockData ) < 0 ||
+                TAUtil.CounterAttack( aStockData ) < 0 )
             {
                 this.Score = 1;
                 this.Signal = true;

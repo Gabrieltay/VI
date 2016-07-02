@@ -26,7 +26,7 @@ namespace ValueInvesting.Controllers
             if ( !QueryMorningStar( ref aStock ) )
                 return false;
 
-            if ( aStock.Market == Enums.Market.US)
+            //if ( aStock.Market == Enums.Market.US)
                 await QueryJitta( aStock );
 
             aStock.LastUpdate = DateTime.Now;

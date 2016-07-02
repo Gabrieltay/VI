@@ -13,6 +13,9 @@ namespace ValueInvesting.Controllers
         public TAController( StockData aStockData )
         {
             this.mStockData = aStockData;
+            this.UptrendDescriptions = new List<string>();
+            this.DowntrendDescription = new List<string>();
+
             this.UptrendRules = new List<UptrendRule>();
             this.UptrendRules.Add( new Ema20CrossEma40() );
             this.UptrendRules.Add( new Sma50Sma150Up() );
@@ -48,7 +51,10 @@ namespace ValueInvesting.Controllers
                 nUptrendRule.Compute( this.mStockData );
 
                 if ( nUptrendRule.Signal )
+                {
                     nTotalBullIndicators += nUptrendRule.Score;
+                    this.UptrendDescriptions.Add( nUptrendRule.GetDescription() );
+                }
             }
 
             foreach ( DowntrendRule nDowntrendRule in DowntrendRules )
@@ -56,7 +62,10 @@ namespace ValueInvesting.Controllers
                 nDowntrendRule.Compute( this.mStockData );
 
                 if ( nDowntrendRule.Signal )
+                {
                     nTotalBearIndicators += nDowntrendRule.Score;
+                    this.DowntrendDescription.Add( nDowntrendRule.GetDescription() );
+                }
             }
 
             this.BullStrength = nTotalBullIndicators;
@@ -87,6 +96,16 @@ namespace ValueInvesting.Controllers
         }
 
         public List<DowntrendRule> DowntrendRules
+        {
+            get; set;
+        }
+
+        public List<String> UptrendDescriptions
+        {
+            get; set;
+        }
+
+        public List<String> DowntrendDescription
         {
             get; set;
         }
