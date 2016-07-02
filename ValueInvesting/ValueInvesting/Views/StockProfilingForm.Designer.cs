@@ -53,17 +53,20 @@
             this.JepLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bizConLabel = new System.Windows.Forms.Label();
-            this.addButton = new System.Windows.Forms.Button();
-            this.delButton = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sumTxtbox = new System.Windows.Forms.TextBox();
             this.infoTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.BullBearBox = new System.Windows.Forms.PictureBox();
+            this.delButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BullBearBox)).BeginInit();
             this.SuspendLayout();
             // 
             // stockNameLabel
@@ -346,7 +349,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(230, 89);
+            this.label1.Location = new System.Drawing.Point(182, 89);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(205, 22);
@@ -357,7 +360,7 @@
             // 
             this.bizConLabel.AutoSize = true;
             this.bizConLabel.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bizConLabel.Location = new System.Drawing.Point(431, 89);
+            this.bizConLabel.Location = new System.Drawing.Point(383, 89);
             this.bizConLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bizConLabel.Name = "bizConLabel";
             this.bizConLabel.Size = new System.Drawing.Size(32, 23);
@@ -365,38 +368,6 @@
             this.bizConLabel.Text = "##";
             this.bizConLabel.MouseLeave += new System.EventHandler(this.bizConLabel_MouseLeave);
             this.bizConLabel.MouseHover += new System.EventHandler(this.bizConLabel_MouseHover);
-            // 
-            // addButton
-            // 
-            this.addButton.BackColor = System.Drawing.Color.Transparent;
-            this.addButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.addButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Image = global::ValueInvesting.Properties.Resources.Add;
-            this.addButton.Location = new System.Drawing.Point(315, 384);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 81);
-            this.addButton.TabIndex = 9;
-            this.infoTooltip.SetToolTip(this.addButton, "Add/Update");
-            this.addButton.UseVisualStyleBackColor = false;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
-            // 
-            // delButton
-            // 
-            this.delButton.BackColor = System.Drawing.Color.Transparent;
-            this.delButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.delButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.delButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.delButton.Image = global::ValueInvesting.Properties.Resources.Delete;
-            this.delButton.Location = new System.Drawing.Point(404, 384);
-            this.delButton.Margin = new System.Windows.Forms.Padding(2);
-            this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(75, 81);
-            this.delButton.TabIndex = 10;
-            this.infoTooltip.SetToolTip(this.delButton, "Delete");
-            this.delButton.UseVisualStyleBackColor = false;
-            this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
             // groupBox6
             // 
@@ -424,11 +395,63 @@
             this.sumTxtbox.Size = new System.Drawing.Size(262, 228);
             this.sumTxtbox.TabIndex = 0;
             // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "Bear");
+            this.imageList.Images.SetKeyName(1, "Bull");
+            // 
+            // BullBearBox
+            // 
+            this.BullBearBox.Image = global::ValueInvesting.Properties.Resources.Bull;
+            this.BullBearBox.Location = new System.Drawing.Point(429, 72);
+            this.BullBearBox.Name = "BullBearBox";
+            this.BullBearBox.Size = new System.Drawing.Size(50, 50);
+            this.BullBearBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BullBearBox.TabIndex = 13;
+            this.BullBearBox.TabStop = false;
+            this.BullBearBox.MouseLeave += new System.EventHandler(this.BullBearBox_MouseLeave);
+            this.BullBearBox.MouseHover += new System.EventHandler(this.BullBearBox_MouseHover);
+            // 
+            // delButton
+            // 
+            this.delButton.BackColor = System.Drawing.Color.Transparent;
+            this.delButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.delButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.delButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delButton.Image = global::ValueInvesting.Properties.Resources.Delete;
+            this.delButton.Location = new System.Drawing.Point(404, 384);
+            this.delButton.Margin = new System.Windows.Forms.Padding(2);
+            this.delButton.Name = "delButton";
+            this.delButton.Size = new System.Drawing.Size(75, 81);
+            this.delButton.TabIndex = 10;
+            this.infoTooltip.SetToolTip(this.delButton, "Delete");
+            this.delButton.UseVisualStyleBackColor = false;
+            this.delButton.Click += new System.EventHandler(this.delButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.BackColor = System.Drawing.Color.Transparent;
+            this.addButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.addButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addButton.Image = global::ValueInvesting.Properties.Resources.Add;
+            this.addButton.Location = new System.Drawing.Point(315, 384);
+            this.addButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 81);
+            this.addButton.TabIndex = 9;
+            this.infoTooltip.SetToolTip(this.addButton, "Add/Update");
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
             // StockProfilingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 472);
+            this.Controls.Add(this.BullBearBox);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.delButton);
             this.Controls.Add(this.addButton);
@@ -462,6 +485,7 @@
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BullBearBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,5 +521,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox sumTxtbox;
         private System.Windows.Forms.ToolTip infoTooltip;
+        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.PictureBox BullBearBox;
     }
 }

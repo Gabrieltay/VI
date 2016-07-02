@@ -204,6 +204,17 @@ namespace ValueInvesting.Models
             }
         }
 
+        public List<String> BullIndicators
+        {
+            get; set;
+        }
+
+        public List<String> BearIndicators
+        {
+            get; set;
+        }
+
+
         public String StrengthImg
         {
             get

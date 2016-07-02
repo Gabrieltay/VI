@@ -288,6 +288,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="images\Bear.png" />
+    <None Include="images\Bull.png" />
     <Content Include="License-LGPL.txt" />
     <Content Include="Settings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

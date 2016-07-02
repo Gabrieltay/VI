@@ -73,6 +73,8 @@ namespace ValueInvesting.Views
 
             aStock.ShortStrength = nTACont.BearStrength;
             aStock.LongStrength = nTACont.BullStrength;
+            aStock.BullIndicators = nTACont.UptrendDescriptions;
+            aStock.BearIndicators = nTACont.DowntrendDescriptions;
 
             if ( Editable )
             {

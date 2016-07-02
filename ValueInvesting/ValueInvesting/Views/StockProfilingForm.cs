@@ -27,6 +27,8 @@ namespace ValueInvesting.Views
             this.symLabel.Text = this.mStock.Sym + " - " + this.mStock.Mkt;
             this.bizConLabel.Text = this.mStock.BizConf.ToString();
             this.sumTxtbox.Text = this.mStock.Summary;
+            this.BullBearBox.Image =  this.mStock.Strength.Equals("LONG") ? global::ValueInvesting.Properties.Resources.Bull :
+               global::ValueInvesting.Properties.Resources.Bear ;
 
             if ( this.mStock.Last < 1.0 )
                 this.priceLabel.Text = String.Format( "{0:C3}", this.mStock.Last );
@@ -183,6 +185,20 @@ namespace ValueInvesting.Views
             this.Close();
         }
 
-        
+        private void BullBearBox_MouseHover( object sender, EventArgs e )
+        {
+            String nDisplay = "";
+            List<String> nIndicators = this.mStock.Strength.Equals( "LONG" ) ? this.mStock.BullIndicators : this.mStock.BearIndicators;
+            foreach(String nStr in nIndicators)
+            {
+                nDisplay += nStr + "\n";
+            }
+            this.infoTooltip.Show( nDisplay, this.BullBearBox );
+        }
+
+        private void BullBearBox_MouseLeave( object sender, EventArgs e )
+        {
+            this.infoTooltip.Hide( this.BullBearBox );
+        }
     }
 }

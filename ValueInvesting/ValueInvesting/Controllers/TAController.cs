@@ -14,7 +14,7 @@ namespace ValueInvesting.Controllers
         {
             this.mStockData = aStockData;
             this.UptrendDescriptions = new List<string>();
-            this.DowntrendDescription = new List<string>();
+            this.DowntrendDescriptions = new List<string>();
 
             this.UptrendRules = new List<UptrendRule>();
             this.UptrendRules.Add( new Ema20CrossEma40() );
@@ -64,7 +64,7 @@ namespace ValueInvesting.Controllers
                 if ( nDowntrendRule.Signal )
                 {
                     nTotalBearIndicators += nDowntrendRule.Score;
-                    this.DowntrendDescription.Add( nDowntrendRule.GetDescription() );
+                    this.DowntrendDescriptions.Add( nDowntrendRule.GetDescription() );
                 }
             }
 
@@ -105,7 +105,7 @@ namespace ValueInvesting.Controllers
             get; set;
         }
 
-        public List<String> DowntrendDescription
+        public List<String> DowntrendDescriptions
         {
             get; set;
         }
