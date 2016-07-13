@@ -188,23 +188,36 @@ namespace ValueInvesting.Parsers
             double nSum3 = 0.0;
             double nSum5 = 0.0;
             double nSum10 = 0.0;
-            double nMinGrowth = 1000;
+            double nMinGrowth = 10000;
 
             string[] nCols3 = aRow3.Split( ',' );
 
             nSum3 = String.IsNullOrEmpty( nCols3[10] ) ? 0.0 : double.Parse( nCols3[10] );
+            if ( nSum3 != 0.0 )
+                nMinGrowth = nSum3;
 
             string[] nCols5 = aRow5.Split( ',' );
 
             nSum5 = String.IsNullOrEmpty( nCols5[10] ) ? 0.0 : double.Parse( nCols5[10] );
+            if ( nSum5 != 0.0 )
+            {
+                nMinGrowth = Math.Min( nSum5, nMinGrowth) ;
+            }
 
             string[] nCols10 = aRow10.Split( ',' );
 
             nSum10 = String.IsNullOrEmpty( nCols10[10] ) ? 0.0 : double.Parse( nCols10[10] );
-
-
-            nMinGrowth = Math.Min( nSum3, nSum5 );
-            nMinGrowth = Math.Min( nMinGrowth, nSum10 );
+            if ( nSum10 != 0.0 )
+            {
+                nMinGrowth = Math.Min( nSum10, nMinGrowth );
+            }
+            
+            //nMinGrowth = Math.Min( nSum3, nSum5 );
+            //nMinGrowth = Math.Min( nMinGrowth, nSum10 );
+            if ( nMinGrowth == 10000 )
+            {
+                nMinGrowth = 0;
+            }
 
             if ( nMinGrowth != 0 )
             {

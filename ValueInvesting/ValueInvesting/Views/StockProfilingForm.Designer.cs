@@ -56,10 +56,10 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sumTxtbox = new System.Windows.Forms.TextBox();
             this.infoTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.BullBearBox = new System.Windows.Forms.PictureBox();
             this.delButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.BullBearBox = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -395,25 +395,6 @@
             this.sumTxtbox.Size = new System.Drawing.Size(262, 228);
             this.sumTxtbox.TabIndex = 0;
             // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "Bear");
-            this.imageList.Images.SetKeyName(1, "Bull");
-            // 
-            // BullBearBox
-            // 
-            this.BullBearBox.Image = global::ValueInvesting.Properties.Resources.Bull;
-            this.BullBearBox.Location = new System.Drawing.Point(429, 72);
-            this.BullBearBox.Name = "BullBearBox";
-            this.BullBearBox.Size = new System.Drawing.Size(50, 50);
-            this.BullBearBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BullBearBox.TabIndex = 13;
-            this.BullBearBox.TabStop = false;
-            this.BullBearBox.MouseLeave += new System.EventHandler(this.BullBearBox_MouseLeave);
-            this.BullBearBox.MouseHover += new System.EventHandler(this.BullBearBox_MouseHover);
-            // 
             // delButton
             // 
             this.delButton.BackColor = System.Drawing.Color.Transparent;
@@ -445,6 +426,25 @@
             this.infoTooltip.SetToolTip(this.addButton, "Add/Update");
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "Bear");
+            this.imageList.Images.SetKeyName(1, "Bull");
+            // 
+            // BullBearBox
+            // 
+            this.BullBearBox.Image = global::ValueInvesting.Properties.Resources.Bull;
+            this.BullBearBox.Location = new System.Drawing.Point(429, 72);
+            this.BullBearBox.Name = "BullBearBox";
+            this.BullBearBox.Size = new System.Drawing.Size(50, 50);
+            this.BullBearBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BullBearBox.TabIndex = 13;
+            this.BullBearBox.TabStop = false;
+            this.BullBearBox.MouseLeave += new System.EventHandler(this.BullBearBox_MouseLeave);
+            this.BullBearBox.MouseHover += new System.EventHandler(this.BullBearBox_MouseHover);
             // 
             // StockProfilingForm
             // 

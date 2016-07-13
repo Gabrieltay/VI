@@ -28,9 +28,10 @@ namespace ValueInvesting.Parsers
 
         public const String QUERY_STR = "http://finance.yahoo.com/d/quotes.csv?s=@TICK&f=npsxr5e";
 
-        public const String PROFILE_STR = "https://finance.yahoo.com/q/pr?s=@TICK+profile";
+        //public const String PROFILE_STR = "https://finance.yahoo.com/q/pr?s=@TICK+profile";
+        public const String PROFILE_STR = "https://sg.finance.yahoo.com/q/pr?s=@TICK";
 
-        private const String PROFILE_XPATH = "//div[@id=\"screen\"]/div[@id=\"rightcol\"]/table[2]/tr[2]/td[1]/p[1]";
+        private const String PROFILE_XPATH = "//table[@id=\"yfncsumtab\"]/tr[2]/td[1]/p[1]";
 
         public YahooFinanceParser( StockProfile aStock )
         {

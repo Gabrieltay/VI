@@ -20,8 +20,12 @@ namespace ValueInvesting.Controllers
             if ( !QueryYahooFinance( ref aStock ) )
                 return false;
 
+            // Obsolete
             if ( !QueryYahooFinanceProfile( ref aStock ) )
                 return false;
+
+            //if ( aStock.Market == Enums.Market.US && !QueryReuters(ref aStock))
+            //    return false;
 
             if ( !QueryMorningStar( ref aStock ) )
                 return false;
@@ -86,6 +90,21 @@ namespace ValueInvesting.Controllers
             YahooFinanceParser nYahooParser = new YahooFinanceParser( aStock );
 
             if ( nYahooParser.StartHTML( nYahooHtmlStr ) )
+                return true;
+
+            return false;
+        }
+
+        private bool QueryReuters( ref StockProfile aStock)
+        {
+            String nReutersQueryStr = ReutersParser.QUERY_STR;
+
+            nReutersQueryStr = nReutersQueryStr.Replace( "@TICK", aStock.Sym );
+
+            String nReutersHtmlStr = RESTController.GetREST( nReutersQueryStr );
+            ReutersParser nReutersParser = new ReutersParser( aStock );
+
+            if ( nReutersParser.StartHTML( nReutersHtmlStr ) )
                 return true;
 
             return false;
